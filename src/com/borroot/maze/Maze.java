@@ -79,6 +79,17 @@ public class Maze {
 		maze[cell.y][cell.x] = START;
 	}
 
+	public Cell getStart(){
+		for(int y = 0; y < maze.length; y++){
+			for(int x = 0; x < maze[y].length; x++){
+				if(maze[y][x] == START){
+					return new Cell(x, y);
+				}
+			}
+		}
+		return new Cell(1, 1);
+	}
+
 	public void setFinish(Cell cell){
 		maze[cell.y][cell.x] = FINISH;
 	}
@@ -103,15 +114,27 @@ public class Maze {
 
 		for(int y = 0; y < maze.length; y++){
 			for(int x = 0; x < maze[y].length; x++){
-				if(maze[y][x] == WALL){
-					if(y % 2 == 0){
-						builder.append("- ");
-					}else{
-						builder.append("| ");
-					}
-				}else{
-					builder.append("  ");
+				switch (maze[y][x]){
+					case WALL:
+						if(y % 2 == 0){
+							builder.append("-");
+						}else{
+							builder.append("|");
+						}
+						break;
+					case EMPTY:
+						builder.append(" ");
+						break;
+					case START:
+						builder.append("S");
+						break;
+					case FINISH:
+						builder.append("F");
+						break;
+					case PATH:
+						builder.append("X");
 				}
+				builder.append(" ");
 			}
 			builder.append("\n");
 		}

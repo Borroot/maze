@@ -19,19 +19,22 @@ public class DepthSolver implements Solver {
 
 	private void search(Maze maze, Cell current){
 		if(maze.cellVal(current) == FINISH){
-			maze.set(current, PATH);
 			System.out.println(maze);
 			return;
 		}
 
-		maze.set(current, PATH);
+		if(maze.cellVal(current) != START)
+			maze.set(current, PATH);
+
 		for(Direction dir : Direction.values()){
 			if(freeAtDir(maze, current, dir)){
 				Cell next = new Cell(current.x + dir.getX(), current.y + dir.getY());
 				search(maze, next);
 			}
 		}
-		maze.set(current, EMPTY);
+
+		if(maze.cellVal(current) != START)
+			maze.set(current, EMPTY);
 	}
 
 	@Override

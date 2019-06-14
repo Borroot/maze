@@ -8,7 +8,7 @@ import com.borroot.solvers.DepthSolver;
 public class Main {
 
     public static void main(String[] args) {
-    	Maze maze = new Maze(12, 22);
+    	Maze maze = new Maze(15, 25);
 
     	new BacktrackGenerator().generate(maze);
     	maze.setStart(new Cell(1, maze.getHeight()-1));

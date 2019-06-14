@@ -1,6 +1,7 @@
 package com.borroot.maze;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import static com.borroot.maze.Tile.*;
@@ -43,8 +44,8 @@ public class Maze {
 	 * Use this function to get all the empty cells currently in the maze.
 	 * @return a list containing all the non-wall cells.
 	 */
-	public List<Cell> getEmptyCells(){
-		List<Cell> cells = new ArrayList<>();
+	public LinkedList<Cell> getEmptyCells(){
+		LinkedList<Cell> cells = new LinkedList<>();
 
 		for(int y = 0; y < maze.length; y++){
 			for(int x = 0; x < maze[y].length; x++){
@@ -56,12 +57,25 @@ public class Maze {
 		return cells;
 	}
 
-	public void set(int x, int y, Tile tile){
-		maze[y][x] = tile;
+	public void set(Cell cell, Tile tile){
+		maze[cell.y][cell.x] = tile;
 	}
 
-	public Tile get(int x, int y){
-		return maze[y][x];
+	public Tile get(Cell cell){
+		return maze[cell.y][cell.x];
+	}
+
+	public void setStart(Cell cell){
+		maze[cell.y][cell.x] = START;
+	}
+
+	public void setFinish(Cell cell){
+		maze[cell.y][cell.x] = FINISH;
+	}
+
+	public void removeWall(Cell c1, Cell c2){
+		Cell wall = new Cell((c1.x+c2.x)/2, (c1.y+c2.y)/2);
+		maze[wall.y][wall.x] = EMPTY;
 	}
 
 	/**

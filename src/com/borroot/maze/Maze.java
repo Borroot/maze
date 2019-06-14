@@ -5,11 +5,14 @@ import java.util.List;
 
 import static com.borroot.maze.Tile.*;
 
+/**
+ * This class represents a maze.
+ * @author Bram Pulles
+ */
 public class Maze {
 
 	private static final int DEFAULT_SIZE = 5;
 	private Tile maze[][];
-	private List<Cell> cells;
 
 	public Maze(){
 		this(DEFAULT_SIZE, DEFAULT_SIZE);
@@ -20,7 +23,6 @@ public class Maze {
 	}
 
 	public Maze(final int HEIGHT, final int WIDTH){
-		cells = new ArrayList<>(HEIGHT * WIDTH);
 		maze = new Tile[HEIGHT * 2 + 1][WIDTH * 2 + 1];
 		init();
 	}
@@ -32,22 +34,43 @@ public class Maze {
 					maze[y][x] = WALL;
 				}else{
 					maze[y][x] = EMPTY;
-					cells.add(new Cell(x, y, EMPTY));
 				}
 			}
 		}
 	}
 
-	public void setCell(Cell cell){
-		maze[cell.getY()][cell.getX()] = cell.getTile();
+	/**
+	 * Use this function to get all the empty cells currently in the maze.
+	 * @return a list containing all the non-wall cells.
+	 */
+	public List<Cell> getEmptyCells(){
+		List<Cell> cells = new ArrayList<>();
+
+		for(int y = 0; y < maze.length; y++){
+			for(int x = 0; x < maze[y].length; x++){
+				if(maze[y][x] == EMPTY){
+					cells.add(new Cell(x, y));
+				}
+			}
+		}
+		return cells;
 	}
 
-	public Tile getTile(int x, int y){
+	public void set(int x, int y, Tile tile){
+		maze[y][x] = tile;
+	}
+
+	public Tile get(int x, int y){
 		return maze[y][x];
 	}
 
-	public List<Cell> getCells(){
-		return cells;
+	/**
+	 * Use this function to get the tile value of a cell.
+	 * @param cell with x and y coordinates in the maze.
+	 * @return the corresponding tile value.
+	 */
+	public Tile cellVal(Cell cell){
+		return maze[cell.y][cell.x];
 	}
 
 	@Override

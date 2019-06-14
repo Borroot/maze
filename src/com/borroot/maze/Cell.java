@@ -1,38 +1,17 @@
 package com.borroot.maze;
 
+/**
+ * Since this class will be used a lot to represent the different cells in the maze
+ * the attributes will be public to improve the user experience while using this class.
+ * @author Bram Pulles
+ */
 public class Cell {
 
-	private int x;
-	private int y;
-	private Tile tile;
+	public final int x;
+	public final int y;
 
-	public Cell(int x, int y, Tile tile){
+	public Cell(int x, int y){
 		this.x = x;
 		this.y = y;
-		this.tile = tile;
-	}
-
-	public void setX(int x){
-		this.x = x;
-	}
-
-	public void setY(int y){
-		this.y = y;
-	}
-
-	public void setTile(Tile tile){
-		this.tile = tile;
-	}
-
-	public int getX(){
-		return x;
-	}
-
-	public int getY(){
-		return y;
-	}
-
-	public Tile getTile(){
-		return tile;
 	}
 }

@@ -15,7 +15,7 @@ public class BacktrackGenerator implements Generator {
 
 	@Override
 	public void generate(Maze maze){
-		List<Cell> unvisited = maze.getCells();
+		List<Cell> unvisited = maze.getEmptyCells();
 		List<Cell> visited = new ArrayList<>();
 
 		generate_recursive(maze, unvisited, visited);

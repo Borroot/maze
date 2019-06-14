@@ -24,8 +24,10 @@ public class Maze {
 	}
 
 	public Maze(final int HEIGHT, final int WIDTH){
-		maze = new Tile[HEIGHT * 2 + 1][WIDTH * 2 + 1];
-		init();
+		if(HEIGHT > 0 && WIDTH > 0){
+			maze = new Tile[HEIGHT * 2 + 1][WIDTH * 2 + 1];
+			init();
+		}
 	}
 
 	public void init(){
@@ -55,6 +57,14 @@ public class Maze {
 			}
 		}
 		return cells;
+	}
+
+	public int getHeight(){
+		return maze.length;
+	}
+
+	public int getWidth(){
+		return maze[0].length;
 	}
 
 	public void set(Cell cell, Tile tile){
@@ -95,12 +105,12 @@ public class Maze {
 			for(int x = 0; x < maze[y].length; x++){
 				if(maze[y][x] == WALL){
 					if(y % 2 == 0){
-						builder.append("-");
+						builder.append("- ");
 					}else{
-						builder.append("|");
+						builder.append("| ");
 					}
 				}else{
-					builder.append(" ");
+					builder.append("  ");
 				}
 			}
 			builder.append("\n");

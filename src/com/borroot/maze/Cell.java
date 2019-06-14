@@ -14,4 +14,14 @@ public class Cell {
 		this.x = x;
 		this.y = y;
 	}
+
+	@Override
+	public boolean equals(Object o){
+		if(o instanceof Cell){
+			Cell cell = (Cell)o;
+			return cell.x == this.x && cell.y == this.y;
+		}else{
+			return false;
+		}
+	}
 }

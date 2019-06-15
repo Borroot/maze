@@ -6,8 +6,18 @@ import com.borroot.maze.Maze;
 
 import static com.borroot.maze.Tile.*;
 
+/**
+ * Solve the maze using a depth-first search algorithm.
+ * @author Bram Pulles
+ */
 public class DepthSolver implements Solver {
 
+	/**
+	 * @param maze
+	 * @param from
+	 * @param dir
+	 * @return if the cell in the given direction is free (non-wall and non-path).
+	 */
 	private boolean freeAtDir(Maze maze, Cell from, Direction dir){
 		Cell to = new Cell(from.x + dir.getX(), from.y + dir.getY());
 		try{
@@ -17,6 +27,11 @@ public class DepthSolver implements Solver {
 		}
 	}
 
+	/**
+	 * Solve the maze.
+	 * @param maze
+	 * @param current
+	 */
 	private void search(Maze maze, Cell current){
 		if(maze.cellVal(current) == FINISH){
 			System.out.println(maze);

@@ -15,14 +15,26 @@ public class Maze {
 	private static final int DEFAULT_SIZE = 5;
 	private Tile maze[][];
 
+	/**
+	 * Make a maze with the default size.
+	 */
 	public Maze(){
 		this(DEFAULT_SIZE, DEFAULT_SIZE);
 	}
 
+	/**
+	 * Make a maze with n*n size.
+	 * @param SIZE
+	 */
 	public Maze(final int SIZE){
 		this(SIZE, SIZE);
 	}
 
+	/**
+	 * Make a maze with the specified height and width.
+	 * @param HEIGHT
+	 * @param WIDTH
+	 */
 	public Maze(final int HEIGHT, final int WIDTH){
 		if(HEIGHT > 0 && WIDTH > 0){
 			maze = new Tile[HEIGHT * 2 + 1][WIDTH * 2 + 1];
@@ -30,6 +42,9 @@ public class Maze {
 		}
 	}
 
+	/**
+	 * Initialize the maze to a grid with cells al having four walls.
+	 */
 	public void init(){
 		for(int y = 0; y < maze.length; y++){
 			for(int x = 0; x < maze[y].length; x++){
@@ -91,10 +106,17 @@ public class Maze {
 		return maze[cell.y][cell.x];
 	}
 
+	/**
+	 * Set the cell to a start tile.
+	 * @param cell
+	 */
 	public void setStart(Cell cell){
 		maze[cell.y][cell.x] = START;
 	}
 
+	/**
+	 * @return the cell with the start tile in the maze.
+	 */
 	public Cell getStart(){
 		for(int y = 0; y < maze.length; y++){
 			for(int x = 0; x < maze[y].length; x++){
@@ -106,10 +128,19 @@ public class Maze {
 		return new Cell(1, 1);
 	}
 
+	/**
+	 * Set the cell to a finish tile.
+	 * @param cell
+	 */
 	public void setFinish(Cell cell){
 		maze[cell.y][cell.x] = FINISH;
 	}
 
+	/**
+	 * Remove the wall between cell c1 and cell c2.
+	 * @param c1
+	 * @param c2
+	 */
 	public void removeWall(Cell c1, Cell c2){
 		Cell wall = new Cell((c1.x+c2.x)/2, (c1.y+c2.y)/2);
 		maze[wall.y][wall.x] = EMPTY;

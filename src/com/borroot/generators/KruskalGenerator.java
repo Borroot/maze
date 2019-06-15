@@ -9,12 +9,34 @@ import java.util.LinkedList;
 import static com.borroot.maze.Tile.EMPTY;
 import static com.borroot.maze.Tile.WALL;
 
+/**
+ * Generate a maze using a randomized version of Kruskal's algorithm.
+ *
+ * The algorithm is implemented as follows:
+ *     1. Create a list of all walls, and create a set for each cell, each containing just that one cell.
+ *     2. For each wall, in some random order:
+ *         1. If the cells divided by this wall belong to distinct sets:
+ *             1. Remove the current wall.
+ *             2. Join the sets of the formerly divided cells.
+ *
+ * @author Bram Pulles
+ */
 public class KruskalGenerator implements Generator {
 
+	/**
+	 * @param maze
+	 * @param wall
+	 * @return if the divides cell horizontally.
+	 */
 	private boolean isHorizontal(Maze maze, Cell wall){
 		return maze.get(new Cell(wall.x+1, wall.y)) != WALL && maze.get(new Cell(wall.x-1, wall.y)) != WALL;
 	}
 
+	/**
+	 * @param maze
+	 * @param wall
+	 * @return the cells this wall divides.
+	 */
 	private Cell[] getDividedCells(Maze maze, Cell wall){
 		if(isHorizontal(maze, wall)){
 			Cell[] cells = {new Cell(wall.x+1, wall.y), new Cell(wall.x-1, wall.y)};
@@ -25,6 +47,11 @@ public class KruskalGenerator implements Generator {
 		}
 	}
 
+	/**
+	 * @param cells
+	 * @param cellsets
+	 * @return the cellsets of the cells at index 0 and 1.
+	 */
 	private LinkedList<Cell>[] getCellsets(Cell[] cells, LinkedList<LinkedList<Cell>> cellsets){
 		LinkedList<Cell>[] sets = new LinkedList[2];
 
@@ -37,10 +64,14 @@ public class KruskalGenerator implements Generator {
 				}
 			}
 		}
-
 		return sets;
 	}
 
+	/**
+	 * @param cells
+	 * @param cellsets
+	 * @return if the cells are inside different cellsets.
+	 */
 	private boolean distinctSets(Cell[] cells, LinkedList<LinkedList<Cell>> cellsets) {
 		LinkedList<Cell>[] sets = getCellsets(cells, cellsets);
 		if(sets[0] != null && sets[1] != null){
@@ -49,6 +80,11 @@ public class KruskalGenerator implements Generator {
 		return false;
 	}
 
+	/**
+	 * Join the cellset at index 0 and 1.
+	 * @param cells
+	 * @param cellsets
+	 */
 	private void joinSets(Cell[] cells, LinkedList<LinkedList<Cell>> cellsets){
 		LinkedList<Cell>[] sets = getCellsets(cells, cellsets);
 		cellsets.remove(sets[0]);

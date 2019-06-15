@@ -59,6 +59,22 @@ public class Maze {
 		return cells;
 	}
 
+	/**
+	 * @return all the walls except for the border walls.
+	 */
+	public LinkedList<Cell> getWallCells(){
+		LinkedList<Cell> cells = new LinkedList<>();
+
+		for(int y = 1; y < maze.length-1; y++){
+			for(int x = 1; x < maze[y].length-1; x++){
+				if(maze[y][x] == WALL){
+					cells.add(new Cell(x, y));
+				}
+			}
+		}
+		return cells;
+	}
+
 	public int getHeight(){
 		return maze.length;
 	}

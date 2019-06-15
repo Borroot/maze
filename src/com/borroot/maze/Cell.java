@@ -24,4 +24,9 @@ public class Cell {
 			return false;
 		}
 	}
+
+	@Override
+	public String toString(){
+		return "{" + x + "," + y + "}";
+	}
 }

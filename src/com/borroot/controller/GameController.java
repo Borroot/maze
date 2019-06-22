@@ -12,9 +12,10 @@ public class GameController {
 
 	public GameController(){
 		 view = new GameView();
+		 view.draw(generateMaze());
 	}
 
-	private void generateMaze(){
+	private Maze generateMaze(){
 		Maze maze = new Maze(3);
 
 		new KruskalGenerator().generate(maze);
@@ -22,6 +23,6 @@ public class GameController {
 		maze.setStart(new Cell(1, maze.getHeight()-1));
 		maze.setFinish(new Cell(maze.getWidth()-1, 1));
 
-		new DepthSolver().solve(maze);
+		return maze;
 	}
 }

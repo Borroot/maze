@@ -4,19 +4,19 @@ import com.borroot.generators.BacktrackGenerator;
 import com.borroot.generators.KruskalGenerator;
 import com.borroot.maze.Cell;
 import com.borroot.maze.Maze;
-import com.borroot.view.GameView;
+import com.borroot.view.View;
 
 public class GameController {
 
-	private GameView view;
+	private View view;
 
 	public GameController(){
-		 view = new GameView();
+		 view = new View();
 		 view.draw(generateMaze());
 	}
 
 	private Maze generateMaze(){
-		Maze maze = new Maze(10);
+		Maze maze = new Maze(10, 20);
 
 		new BacktrackGenerator().generate(maze);
 

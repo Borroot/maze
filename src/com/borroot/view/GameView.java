@@ -14,7 +14,7 @@ import static com.borroot.maze.Tile.WALL;
 public class GameView {
 
 	private final int WIDTH = 1000, HEIGHT = 800;
-	private final int LINE_LENGTH = 50, LINE_WIDTH = 10;
+	private final int LL = 50, LINE_WIDTH = 10; // LL is the line length
 
 	private Canvas canvas = new Canvas(WIDTH-150, HEIGHT-150);
 	private GraphicsContext gc = canvas.getGraphicsContext2D();
@@ -35,32 +35,26 @@ public class GameView {
 		window.show();
 	}
 
-	private boolean threeHorizontalWalls(Maze maze, int x, int y){
+	private boolean validWall(Maze maze, int x, int y){
+		return maze.validIndex(x, y) && maze.cellVal(new Cell(x, y)) == WALL;
+	}
+
+	private boolean threeWalls(Maze maze, int x, int y, boolean hor){
 		for(int i = 0; i < 3; i++){
-			int newx = x+i;
-			if(!(maze.validIndex(newx, y) && maze.cellVal(new Cell(newx, y)) == WALL)){
+			int newx = (hor)? x+i : x;
+			int newy = (hor)? y : y+i;
+
+			if(!validWall(maze, newx, newy)){
 				return false;
 			}
 		}
 		return true;
 	}
 
-	private void drawHorizontalLine(int x, int y){
-		gc.strokeLine(x*LINE_LENGTH, y*LINE_LENGTH, x*LINE_LENGTH + 2*LINE_LENGTH, y*LINE_LENGTH);
-	}
-
-	private boolean threeVerticalWalls(Maze maze, int x, int y){
-		for(int i = 0; i < 3; i++){
-			int newy = y+i;
-			if(!(maze.validIndex(x, newy) && maze.cellVal(new Cell(x, newy)) == WALL)){
-				return false;
-			}
-		}
-		return true;
-	}
-
-	private void drawVerticalLine(int x, int y){
-		gc.strokeLine(x*LINE_LENGTH, y*LINE_LENGTH, x*LINE_LENGTH, y*LINE_LENGTH + 2*LINE_LENGTH);
+	private void drawLine(int x, int y, boolean hor){
+		int endx = (hor)? x*LL + 2*LL : x*LL;
+		int endy = (hor)? y*LL : y*LL + 2*LL;
+		gc.strokeLine(x*LL, y*LL, endx, endy);
 	}
 
 	public void draw(Maze maze){
@@ -71,11 +65,11 @@ public class GameView {
 
 		for(int y = 0; y < maze.getHeight(); y += 2){
 			for(int x = 0; x < maze.getWidth(); x += 2){
-				if(threeHorizontalWalls(maze, x, y)){
-					drawHorizontalLine(x, y);
+				if(threeWalls(maze, x, y, true)){
+					drawLine(x, y, true);
 				}
-				if(threeVerticalWalls(maze, x, y)){
-					drawVerticalLine(x, y);
+				if(threeWalls(maze, x, y, false)){
+					drawLine(x, y, false);
 				}
 			}
 		}

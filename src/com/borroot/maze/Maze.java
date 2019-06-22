@@ -156,6 +156,11 @@ public class Maze {
 		return maze[cell.y][cell.x];
 	}
 
+	/**
+	 * @param x
+	 * @param y
+	 * @return if the given x and y value are in the maze-grid boundaries.
+	 */
 	public boolean validIndex(int x, int y){
 		return x >= 0 && y >= 0 && x < this.getWidth() && y < this.getHeight();
 	}

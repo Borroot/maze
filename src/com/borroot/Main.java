@@ -30,6 +30,9 @@ public class Main extends Application {
 		new GameController();
 	}
 
+	/**
+	 * @return the main stage/window.
+	 */
 	public static Stage getWindow(){
     	return window;
 	}

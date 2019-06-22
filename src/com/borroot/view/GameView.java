@@ -17,6 +17,9 @@ public class GameView extends StackPane {
 
 	private int LL; // Line length
 
+	private double horizontalPadding = 0;
+	private double verticalPadding = 0;
+
 	private Canvas canvas = new Canvas();
 	private GraphicsContext gc = canvas.getGraphicsContext2D();
 
@@ -98,8 +101,8 @@ public class GameView extends StackPane {
 	private void setLineWidth(Maze maze){
 		int lineWidth = LL / 5;
 
-		double horizontalPadding = (canvas.getWidth() - LL * maze.getWidth()) / 2 + 2.5 * lineWidth;
-		double verticalPadding = (canvas.getHeight() - LL * maze.getHeight()) / 2 + 2.5 * lineWidth;
+		horizontalPadding = (canvas.getWidth() - LL * maze.getWidth()) / 2 + 2.5 * lineWidth;
+		verticalPadding = (canvas.getHeight() - LL * maze.getHeight()) / 2 + 2.5 * lineWidth;
 
 		gc.setLineWidth(lineWidth);
 		gc.translate(horizontalPadding, verticalPadding);
@@ -112,6 +115,8 @@ public class GameView extends StackPane {
 	public void draw(Maze maze){
 		canvas.setWidth(this.getWidth());
 		canvas.setHeight(this.getHeight());
+
+		gc.translate(-horizontalPadding, -verticalPadding);
 		gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
 		// TODO: Remove this to remove the background of the canvas.

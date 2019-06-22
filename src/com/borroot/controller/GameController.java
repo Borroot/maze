@@ -1,7 +1,6 @@
 package com.borroot.controller;
 
 import com.borroot.generators.BacktrackGenerator;
-import com.borroot.generators.KruskalGenerator;
 import com.borroot.maze.Cell;
 import com.borroot.maze.Maze;
 import com.borroot.view.View;
@@ -11,11 +10,11 @@ public class GameController {
 	private View view;
 
 	public GameController(){
-		 view = new View();
+		 view = new View(this);
 		 view.draw(generateMaze());
 	}
 
-	private Maze generateMaze(){
+	public Maze generateMaze(){
 		Maze maze = new Maze(14, 15);
 
 		new BacktrackGenerator().generate(maze);

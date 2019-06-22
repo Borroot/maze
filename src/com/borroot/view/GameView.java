@@ -1,6 +1,7 @@
 package com.borroot.view;
 
 import com.borroot.Main;
+import com.borroot.maze.Cell;
 import com.borroot.maze.Maze;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -8,6 +9,8 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.scene.paint.Color;
+
+import java.util.LinkedList;
 
 public class GameView {
 
@@ -21,8 +24,8 @@ public class GameView {
 	}
 
 	public void draw(Maze maze){
-		gc.setFill(Color.BLUE);
-		gc.fillRect(0,0,canvas.getWidth(), canvas.getHeight());
+		gc.setLineWidth(5);
+		gc.strokeLine(0, 0, 0, 50);
 	}
 
 	private void init(){

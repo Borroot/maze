@@ -58,7 +58,7 @@ public class Maze {
 	}
 
 	/**
-	 * Use this function to get all the empty cells currently in the maze.
+	 * Use this function to get all the cells in the maze.
 	 * @return a list containing all the non-wall cells.
 	 */
 	public LinkedList<Cell> getEmptyCells(){
@@ -66,11 +66,12 @@ public class Maze {
 
 		for(int y = 0; y < maze.length; y++){
 			for(int x = 0; x < maze[y].length; x++){
-				if(maze[y][x] == EMPTY){
+				if(!(y % 2 == 0 || x % 2 == 0)){
 					cells.add(new Cell(x, y));
 				}
 			}
 		}
+
 		return cells;
 	}
 

@@ -16,9 +16,9 @@ public class GameController {
 	}
 
 	private Maze generateMaze(){
-		Maze maze = new Maze(5);
+		Maze maze = new Maze(10);
 
-		new KruskalGenerator().generate(maze);
+		new BacktrackGenerator().generate(maze);
 
 		maze.setStart(new Cell(1, maze.getHeight()-1));
 		maze.setFinish(new Cell(maze.getWidth()-1, 1));

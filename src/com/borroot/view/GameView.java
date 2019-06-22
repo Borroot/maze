@@ -13,10 +13,10 @@ import static com.borroot.maze.Tile.WALL;
 
 public class GameView {
 
-	private final int WIDTH = 1000, HEIGHT = 800;
-	private final int LL = 50, LINE_WIDTH = 10; // LL is the line length
+	private final int WIDTH = 1800, HEIGHT = 1000;
+	private final int LL = 20, LINE_WIDTH = LL/5; // LL is the line length
 
-	private Canvas canvas = new Canvas(WIDTH-150, HEIGHT-150);
+	private Canvas canvas = new Canvas(WIDTH, HEIGHT);
 	private GraphicsContext gc = canvas.getGraphicsContext2D();
 
 	public GameView(){
@@ -57,20 +57,22 @@ public class GameView {
 		gc.strokeLine(x*LL, y*LL, endx, endy);
 	}
 
+	private void line(Maze maze, int x, int y, boolean hor){
+		if(threeWalls(maze, x, y, hor)){
+			drawLine(x, y, hor);
+		}
+	}
+
 	public void draw(Maze maze){
 		System.out.println(maze);
 
 		gc.setLineWidth(LINE_WIDTH);
-		gc.translate(50, 50);
+		gc.translate(LINE_WIDTH, LINE_WIDTH);
 
 		for(int y = 0; y < maze.getHeight(); y += 2){
 			for(int x = 0; x < maze.getWidth(); x += 2){
-				if(threeWalls(maze, x, y, true)){
-					drawLine(x, y, true);
-				}
-				if(threeWalls(maze, x, y, false)){
-					drawLine(x, y, false);
-				}
+				line(maze, x, y, true);
+				line(maze, x, y, false);
 			}
 		}
 	}

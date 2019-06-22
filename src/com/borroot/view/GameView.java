@@ -6,6 +6,10 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.StrokeLineCap;
+import javafx.scene.shape.StrokeLineJoin;
+import javafx.scene.shape.StrokeType;
 
 import static com.borroot.maze.Tile.WALL;
 
@@ -53,13 +57,11 @@ public class GameView extends StackPane {
 		int height = (int)canvas.getHeight() / maze.getHeight();
 
 		LL = (width < height)? width : height;
+		LL = (LL % 2 == 0)? LL : LL - 1; // If the LL is uneven the lines get blurry.
 		int lineWidth = LL / 5;
 
-		double horizontalPadding = (canvas.getWidth() - LL * maze.getWidth()) / 2 + 2 * lineWidth;
-		double verticalPadding = (canvas.getHeight() - LL * maze.getHeight()) / 2 + 2 * lineWidth;
-
-		gc.setFill(Color.LIGHTGRAY);
-		gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+		double horizontalPadding = (canvas.getWidth() - LL * maze.getWidth()) / 2 + 2.5 * lineWidth;
+		double verticalPadding = (canvas.getHeight() - LL * maze.getHeight()) / 2 + 2.5 * lineWidth;
 
 		gc.setLineWidth(lineWidth);
 		gc.translate(horizontalPadding, verticalPadding);
@@ -69,6 +71,10 @@ public class GameView extends StackPane {
 		canvas.setWidth(this.getWidth());
 		canvas.setHeight(this.getHeight());
 		gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+
+		// TODO: Remove this to remove the background of the canvas.
+		gc.setFill(Color.LIGHTGREY);
+		gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
 		setLineLengthAndWidth(maze);
 

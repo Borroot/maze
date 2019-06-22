@@ -156,6 +156,10 @@ public class Maze {
 		return maze[cell.y][cell.x];
 	}
 
+	public boolean validIndex(int x, int y){
+		return x >= 0 && y >= 0 && x < this.getWidth() && y < this.getHeight();
+	}
+
 	@Override
 	public String toString(){
 		StringBuilder builder = new StringBuilder();

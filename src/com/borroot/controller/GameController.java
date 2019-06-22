@@ -10,12 +10,12 @@ public class GameController {
 
 	private GameView view;
 
-	public GameController(GameView gameView){
-		view = gameView;
+	public GameController(){
+		 view = new GameView();
 	}
 
 	private void generateMaze(){
-		Maze maze = new Maze(15, 35);
+		Maze maze = new Maze(3);
 
 		new KruskalGenerator().generate(maze);
 

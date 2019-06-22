@@ -18,14 +18,19 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
+	private static Stage window;
+
     public static void main(String[] args) {
     	Application.launch();
     }
 
 	@Override
-	public void start(Stage window) throws Exception {
-    	GameView gameView = new GameView(window);
-		new GameController(gameView);
+	public void start(Stage stage) throws Exception {
+    	this.window = stage;
+		new GameController();
 	}
 
+	public static Stage getWindow(){
+    	return window;
+	}
 }

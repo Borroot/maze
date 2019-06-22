@@ -5,6 +5,7 @@ import com.borroot.maze.Maze;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 
 import static com.borroot.maze.Tile.WALL;
 
@@ -52,10 +53,16 @@ public class GameView extends StackPane {
 		int height = (int)canvas.getHeight() / maze.getHeight();
 
 		LL = (width < height)? width : height;
-
 		int lineWidth = LL / 5;
+
+		double horizontalPadding = (canvas.getWidth() - LL * maze.getWidth()) / 2 + 2 * lineWidth;
+		double verticalPadding = (canvas.getHeight() - LL * maze.getHeight()) / 2 + 2 * lineWidth;
+
+		gc.setFill(Color.LIGHTGRAY);
+		gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+
 		gc.setLineWidth(lineWidth);
-		gc.translate(lineWidth, lineWidth);
+		gc.translate(horizontalPadding, verticalPadding);
 	}
 
 	public void draw(Maze maze){

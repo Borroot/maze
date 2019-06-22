@@ -16,7 +16,7 @@ public class GameController {
 	}
 
 	private Maze generateMaze(){
-		Maze maze = new Maze(10, 20);
+		Maze maze = new Maze(15, 20);
 
 		new BacktrackGenerator().generate(maze);
 

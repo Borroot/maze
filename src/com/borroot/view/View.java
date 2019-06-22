@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 
 public class View {
 
-	private final int WIDTH = 1200, HEIGHT = 800;
+	private final int WIDTH = 1100, HEIGHT = 800;
 	private GameView gameView;
 
 	public View(){
@@ -21,6 +21,7 @@ public class View {
 
 		BorderPane root = new BorderPane();
 		root.setCenter(gameView);
+		root.setTop(new Text("test"));
 
 		Scene scene = new Scene(root, WIDTH, HEIGHT);
 

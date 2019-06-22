@@ -37,8 +37,8 @@ public class GameView {
 
 	private boolean threeHorizontalWalls(Maze maze, int x, int y){
 		for(int i = 0; i < 3; i++){
-			int newx = x+i, newy = y;
-			if(!(maze.validIndex(newx, newy) && maze.cellVal(new Cell(newx, newy)) == WALL)){
+			int newx = x+i;
+			if(!(maze.validIndex(newx, y) && maze.cellVal(new Cell(newx, y)) == WALL)){
 				return false;
 			}
 		}
@@ -46,28 +46,38 @@ public class GameView {
 	}
 
 	private void drawHorizontalLine(int x, int y){
-		gc.strokeLine(x*LINE_LENGTH, y*LINE_LENGTH, x*2*LINE_LENGTH, y*LINE_LENGTH);
+		gc.strokeLine(x*LINE_LENGTH, y*LINE_LENGTH, x*LINE_LENGTH + 2*LINE_LENGTH, y*LINE_LENGTH);
 	}
 
-	private void drawHorizontalLines(Maze maze){
-		for(int y = 0; y < maze.getHeight(); y += 2){
-			for(int x = 0; x < maze.getWidth(); x += 2){
-				if(threeHorizontalWalls(maze, x, y)){
-					drawHorizontalLine(x, y);
-				}
+	private boolean threeVerticalWalls(Maze maze, int x, int y){
+		for(int i = 0; i < 3; i++){
+			int newy = y+i;
+			if(!(maze.validIndex(x, newy) && maze.cellVal(new Cell(x, newy)) == WALL)){
+				return false;
 			}
 		}
+		return true;
 	}
 
-	private void drawVerticalLines(Maze maze){
-
+	private void drawVerticalLine(int x, int y){
+		gc.strokeLine(x*LINE_LENGTH, y*LINE_LENGTH, x*LINE_LENGTH, y*LINE_LENGTH + 2*LINE_LENGTH);
 	}
 
 	public void draw(Maze maze){
 		System.out.println(maze);
 
 		gc.setLineWidth(LINE_WIDTH);
-		drawHorizontalLines(maze);
-		drawVerticalLines(maze);
+		gc.translate(50, 50);
+
+		for(int y = 0; y < maze.getHeight(); y += 2){
+			for(int x = 0; x < maze.getWidth(); x += 2){
+				if(threeHorizontalWalls(maze, x, y)){
+					drawHorizontalLine(x, y);
+				}
+				if(threeVerticalWalls(maze, x, y)){
+					drawVerticalLine(x, y);
+				}
+			}
+		}
 	}
 }

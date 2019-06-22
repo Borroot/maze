@@ -16,7 +16,7 @@ public class GameController {
 	}
 
 	private Maze generateMaze(){
-		Maze maze = new Maze(3);
+		Maze maze = new Maze(5);
 
 		new KruskalGenerator().generate(maze);
 

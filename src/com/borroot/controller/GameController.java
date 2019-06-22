@@ -12,16 +12,17 @@ public class GameController {
 
 	public GameController(){
 		 view = new GameView();
+		 view.draw(generateMaze());
 	}
 
-	private void generateMaze(){
-		Maze maze = new Maze(3);
+	private Maze generateMaze(){
+		Maze maze = new Maze(5);
 
 		new KruskalGenerator().generate(maze);
 
 		maze.setStart(new Cell(1, maze.getHeight()-1));
 		maze.setFinish(new Cell(maze.getWidth()-1, 1));
 
-		new DepthSolver().solve(maze);
+		return maze;
 	}
 }

@@ -1,12 +1,15 @@
 package com.borroot.view;
 
 import com.borroot.Main;
+import com.borroot.maze.Maze;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class GameView {
 
@@ -22,11 +25,14 @@ public class GameView {
 		init();
 	}
 
+	public void draw(Maze maze){
+		root.setCenter(new Text(maze.toString()));
+	}
+
 	private void init(){
-		//root.setCenter(canvas);
-		root.setCenter(new Text("hi"));
 		Scene scene = new Scene(root, WIDTH, HEIGHT);
 
+		window.initStyle(StageStyle.TRANSPARENT);
 		window.setScene(scene);
 		window.setTitle("Maze! And why does this not show?");
 		window.show();

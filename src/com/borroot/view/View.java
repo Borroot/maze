@@ -8,6 +8,7 @@ import com.borroot.generators.KruskalGenerator;
 import com.borroot.maze.Maze;
 import com.borroot.solvers.DepthSolver;
 import com.borroot.solvers.Solver;
+import com.borroot.view.game.GameView;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -18,8 +19,6 @@ import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-
-import javax.xml.soap.Text;
 
 public class View {
 

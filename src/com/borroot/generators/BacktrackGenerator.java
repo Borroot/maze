@@ -125,4 +125,9 @@ public class BacktrackGenerator implements Generator {
 
 		generateMaze(maze, unvisited, visited);
 	}
+
+	@Override
+	public String toString(){
+		return "Backtracking";
+	}
 }

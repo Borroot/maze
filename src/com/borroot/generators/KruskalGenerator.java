@@ -117,6 +117,10 @@ public class KruskalGenerator implements Generator {
 				joinSets(dividedCells, cellsets);
 			}
 		}
+	}
 
+	@Override
+	public String toString(){
+		return "Kruskal";
 	}
 }

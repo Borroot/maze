@@ -3,17 +3,18 @@ package com.borroot.view;
 import com.borroot.Main;
 import com.borroot.controller.GameController;
 import com.borroot.generators.BacktrackGenerator;
+import com.borroot.generators.Generator;
 import com.borroot.generators.KruskalGenerator;
 import com.borroot.maze.Maze;
+import com.borroot.solvers.DepthSolver;
+import com.borroot.solvers.Solver;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
@@ -31,9 +32,16 @@ public class View {
 	private GameView gameView = new GameView();
 	private HBox hbox = new HBox(20);
 
+	private ChoiceBox<Generator> cbGenerator = new ChoiceBox<>();
+	private ChoiceBox<Solver> cbSolver = new ChoiceBox<>();
+
 	private final int MAX_VALUE = 80;
-	private TextField txtHeight = new TextField("10");
-	private TextField txtWidth = new TextField("10");
+	private final int INIT_VALUE = 10;
+	private TextField tfHeight = new TextField(INIT_VALUE + "");
+	private TextField tfWidth = new TextField(INIT_VALUE + "");
+
+	private Button btnGenerate = new Button("Generate Maze!");
+	private Button btnSolve = new Button("Show Solution!");
 
 	public View(GameController controller){
 		this.controller = controller;
@@ -41,7 +49,7 @@ public class View {
 	}
 
 	private void init(){
-		initButtons();
+		initSettings();
 
 		root.setCenter(gameView);
 		root.setBottom(hbox);
@@ -55,37 +63,50 @@ public class View {
 		window.show();
 	}
 
-	private void initButtons(){
-		Button btnGenerate = new Button("Generate Maze!");
-		Button btnSolve = new Button("Show Solution!");
+	private void initSettings(){
+		initButtons();
+		initChoiceBoxes();
 
 		Label lblHeight = new Label("Height:");
 		Label lblWidth = new Label("Width:");
+		tfHeight.setPrefWidth(40);
+		tfWidth.setPrefWidth(40);
 		initValueListeners();
 
-		hbox.getChildren().addAll(btnGenerate, lblHeight, txtHeight, lblWidth, txtWidth, btnSolve);
+		hbox.getChildren().addAll(btnGenerate, cbGenerator, lblHeight, tfHeight, lblWidth, tfWidth, btnSolve, cbSolver);
 		hbox.setAlignment(Pos.BASELINE_CENTER);
 		hbox.setPadding(new Insets(10, 10, 10, 10));
+	}
 
+	private void initChoiceBoxes(){
+		cbGenerator.setItems(FXCollections.observableArrayList(new BacktrackGenerator(), new KruskalGenerator()));
+		cbSolver.setItems(FXCollections.observableArrayList(new DepthSolver()));
+	}
+
+	private void initButtons(){
 		btnGenerate.setOnAction(e -> {
-			int height = Integer.parseInt(txtHeight.getText());
-			int width = Integer.parseInt(txtWidth.getText());
-			controller.btnGenerateAction(new KruskalGenerator(), height, width);
+			int height = Integer.parseInt(tfHeight.getText());
+			int width = Integer.parseInt(tfWidth.getText());
+			controller.btnGenerateAction(cbGenerator.getValue(), height, width);
+		});
+
+		btnSolve.setOnAction(e -> {
+			controller.btnSolveAction(cbSolver.getValue());
 		});
 	}
 
 	private void initValueListeners(){
-		txtHeight.textProperty().addListener(new ChangeListener<String>() {
+		tfHeight.textProperty().addListener(new ChangeListener<String>() {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-				changedValue(txtHeight, newValue);
+				changedValue(tfHeight, newValue);
 			}
 		});
 
-		txtWidth.textProperty().addListener(new ChangeListener<String>() {
+		tfWidth.textProperty().addListener(new ChangeListener<String>() {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-				changedValue(txtWidth, newValue);
+				changedValue(tfWidth, newValue);
 			}
 		});
 	}

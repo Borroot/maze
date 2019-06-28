@@ -3,7 +3,6 @@ package com.borroot.controller;
 import com.borroot.generators.Generator;
 import com.borroot.maze.Cell;
 import com.borroot.maze.Maze;
-import com.borroot.solvers.DepthSolver;
 import com.borroot.solvers.Solver;
 import com.borroot.view.View;
 

@@ -1,9 +1,9 @@
 package com.borroot.controller;
 
-import com.borroot.generators.BacktrackGenerator;
 import com.borroot.generators.Generator;
 import com.borroot.maze.Cell;
 import com.borroot.maze.Maze;
+import com.borroot.solvers.DepthSolver;
 import com.borroot.solvers.Solver;
 import com.borroot.view.View;
 
@@ -18,25 +18,23 @@ public class GameController {
 
 	public void btnGenerateAction(Generator generator, int height, int width){
 		generateMaze(generator, height, width);
-		draw(maze);
+		draw();
 	}
 
 	public void btnSolveAction(Solver solver){
 		solver.solve(maze);
-		draw(maze);
+		draw();
 	}
 
-	public Maze generateMaze(Generator generator, int height, int width){
+	public void generateMaze(Generator generator, int height, int width){
 		maze = new Maze(height, width);
 		generator.generate(maze);
 
 		maze.setStart(new Cell(1, maze.getHeight()-1));
 		maze.setFinish(new Cell(maze.getWidth()-1, 1));
-
-		return maze;
 	}
 
-	private void draw(Maze maze){
+	private void draw(){
 		view.draw(maze);
 	}
 }

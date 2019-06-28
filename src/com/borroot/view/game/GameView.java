@@ -17,7 +17,7 @@ public class GameView extends StackPane {
 	}
 
 	/**
-	 * Draw the given maze.
+	 * Draw the given maze by first drawing the walls and then the path.
 	 * @param maze
 	 */
 	public void draw(Maze maze){

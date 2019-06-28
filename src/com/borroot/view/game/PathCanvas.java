@@ -8,16 +8,33 @@ import javafx.scene.paint.Color;
 
 import static com.borroot.maze.Tile.*;
 
+/**
+ * This canvas draws a path for the solution of the maze.
+ */
 public class PathCanvas extends GameCanvas {
 
 	protected PathCanvas(){
 		super();
 	}
 
+	/**
+	 * Draw a line from (x0, y0) to (x1, y1).
+	 * @param x0
+	 * @param y0
+	 * @param x1
+	 * @param y1
+	 */
 	private void drawPathLine(int x0, int y0, int x1, int y1){
 		gc.strokeLine(x0*LL, y0*LL, x1*LL, y1*LL);
 	}
 
+	/**
+	 * Check for every direction from this point if we can draw a path to another cell
+	 * for the solution.
+	 * @param maze
+	 * @param x
+	 * @param y
+	 */
 	private void linePath(Maze maze, int x, int y){
 		for(Direction dir : Direction.values()){
 			Cell cell = new Cell(x + dir.getX(), y + dir.getY());
@@ -28,8 +45,12 @@ public class PathCanvas extends GameCanvas {
 		}
 	}
 
+	/**
+	 * Draw all the lines from every point and set the correct color and width for lines.
+	 * @param maze
+	 */
 	private void drawSolution(Maze maze){
-		gc.setLineWidth(gc.getLineWidth() * 2 + 1);
+		gc.setLineWidth(gc.getLineWidth() * 2);
 		gc.setStroke(Color.DARKRED);
 
 		if(maze.isSolved()){

@@ -47,6 +47,9 @@ public class View {
 		init();
 	}
 
+	/**
+	 * Initialize the window.
+	 */
 	private void init(){
 		initSettings();
 
@@ -62,6 +65,9 @@ public class View {
 		window.show();
 	}
 
+	/**
+	 * Initialize the settings at the bottom of the window.
+	 */
 	private void initSettings(){
 		initButtons();
 		initChoiceBoxes();
@@ -77,6 +83,9 @@ public class View {
 		hbox.setPadding(new Insets(10, 10, 10, 10));
 	}
 
+	/**
+	 * Initialize the choice boxes used to choose a generator and/or solver.
+	 */
 	private void initChoiceBoxes(){
 		cbGenerator.setItems(FXCollections.observableArrayList(new BacktrackGenerator(), new KruskalGenerator()));
 		cbGenerator.getSelectionModel().selectFirst();
@@ -85,6 +94,9 @@ public class View {
 		cbSolver.getSelectionModel().selectFirst();
 	}
 
+	/**
+	 * Initialize the 'generate maze' and 'solve maze' buttons.
+	 */
 	private void initButtons(){
 		btnGenerate.setOnAction(e -> {
 			int height = Integer.parseInt(tfHeight.getText());
@@ -97,6 +109,9 @@ public class View {
 		});
 	}
 
+	/**
+	 * Initialize the listeners of textfields for the maze size.
+	 */
 	private void initValueListeners(){
 		tfHeight.textProperty().addListener(new ChangeListener<String>() {
 			@Override
@@ -113,6 +128,12 @@ public class View {
 		});
 	}
 
+	/**
+	 * Whenever a value in a textfield is changed check if the new value is an integer
+	 * and within the bounds of the sizes of the maze.
+	 * @param tf
+	 * @param newVal
+	 */
 	private void changedValue(TextField tf, String newVal){
 		if (!newVal.matches("\\d*")) {
 			tf.setText(newVal.replaceAll("[^\\d]", ""));
@@ -126,6 +147,10 @@ public class View {
 		}
 	}
 
+	/**
+	 * Draw the maze.
+	 * @param maze
+	 */
 	public void draw(Maze maze){
 		gameView.draw(maze);
 	}

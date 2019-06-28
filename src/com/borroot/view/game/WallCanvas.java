@@ -6,6 +6,10 @@ import javafx.scene.paint.Color;
 
 import static com.borroot.maze.Tile.WALL;
 
+/**
+ * This class draws the walls of the maze.
+ * @author Bram Pulles
+ */
 public class WallCanvas extends GameCanvas {
 
 	protected WallCanvas(){

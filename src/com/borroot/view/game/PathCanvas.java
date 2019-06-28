@@ -50,7 +50,7 @@ public class PathCanvas extends GameCanvas {
 	 * @param maze
 	 */
 	private void drawSolution(Maze maze){
-		gc.setLineWidth(gc.getLineWidth() * 2);
+		gc.setLineWidth(lineWidth * 2);
 		gc.setStroke(Color.DARKRED);
 
 		if(maze.isSolved()){

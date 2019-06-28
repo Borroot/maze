@@ -11,10 +11,12 @@ import javafx.scene.canvas.GraphicsContext;
 public abstract class GameCanvas extends Canvas {
 
 	protected GraphicsContext gc = this.getGraphicsContext2D();
-	protected int LL; // Line length
 
-	private double horizontalPadding = 0;
-	private double verticalPadding = 0;
+	protected int LL; // Line length
+	protected int lineWidth;
+
+	private int horizontalPadding = 0;
+	private int verticalPadding = 0;
 
 	/**
 	 * Clear the canvas, set the size of the canvas, the line length and the line width.
@@ -38,7 +40,6 @@ public abstract class GameCanvas extends Canvas {
 		int height = (int)h / maze.getHeight();
 
 		LL = (width < height)? width : height;
-		LL = (LL % 2 == 0)? LL : LL - 1; // If the LL is uneven the lines get blurry.
 	}
 
 	/**
@@ -47,10 +48,11 @@ public abstract class GameCanvas extends Canvas {
 	 * @param maze
 	 */
 	private void setLineWidth(Maze maze, double h, double w){
-		int lineWidth = LL / 5;
+		lineWidth = LL / 5;
+		lineWidth = (lineWidth % 2 == 0)? lineWidth : lineWidth - 1;
 
-		horizontalPadding = (w - LL * maze.getWidth()) / 2 + 2.5 * lineWidth;
-		verticalPadding = (h - LL * maze.getHeight()) / 2 + 2.5 * lineWidth;
+		horizontalPadding = (int)((w - LL * maze.getWidth()) / 2 + 2.5 * lineWidth);
+		verticalPadding = (int)((h - LL * maze.getHeight()) / 2 + 2.5 * lineWidth);
 
 		gc.setLineWidth(lineWidth);
 		gc.translate(horizontalPadding, verticalPadding);

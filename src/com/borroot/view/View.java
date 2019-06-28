@@ -80,7 +80,10 @@ public class View {
 
 	private void initChoiceBoxes(){
 		cbGenerator.setItems(FXCollections.observableArrayList(new BacktrackGenerator(), new KruskalGenerator()));
+		cbGenerator.getSelectionModel().selectFirst();
+
 		cbSolver.setItems(FXCollections.observableArrayList(new DepthSolver()));
+		cbSolver.getSelectionModel().selectFirst();
 	}
 
 	private void initButtons(){

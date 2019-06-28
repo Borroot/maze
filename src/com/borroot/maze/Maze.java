@@ -15,6 +15,8 @@ public class Maze {
 	private static final int DEFAULT_SIZE = 5;
 	private Tile maze[][];
 
+	private boolean solved = false;
+
 	/**
 	 * Make a maze with the default size.
 	 */
@@ -55,6 +57,21 @@ public class Maze {
 				}
 			}
 		}
+	}
+
+	/**
+	 * Set the value of solved.
+	 * @param solved if the maze is solved.
+	 */
+	public void setSolved(boolean solved){
+		this.solved = solved;
+	}
+
+	/**
+	 * @return if the maze is solved.
+	 */
+	public boolean isSolved(){
+		return solved;
 	}
 
 	/**

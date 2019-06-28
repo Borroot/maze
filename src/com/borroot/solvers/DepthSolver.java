@@ -12,8 +12,6 @@ import static com.borroot.maze.Tile.*;
  */
 public class DepthSolver implements Solver {
 
-	private boolean solved;
-
 	/**
 	 * @param maze
 	 * @param from
@@ -36,7 +34,7 @@ public class DepthSolver implements Solver {
 	 */
 	private void search(Maze maze, Cell current){
 		if(maze.cellVal(current) == FINISH){
-			solved = true;
+			maze.setSolved(true);
 			return;
 		}
 
@@ -44,19 +42,18 @@ public class DepthSolver implements Solver {
 			maze.set(current, PATH);
 
 		for(Direction dir : Direction.values()){
-			if(freeAtDir(maze, current, dir)){
+			if(!maze.isSolved() && freeAtDir(maze, current, dir)){
 				Cell next = new Cell(current.x + dir.getX(), current.y + dir.getY());
 				search(maze, next);
 			}
 		}
 
-		if(!solved && maze.cellVal(current) != START)
+		if(!maze.isSolved() && maze.cellVal(current) != START)
 			maze.set(current, EMPTY);
 	}
 
 	@Override
 	public void solve(Maze maze) {
-		solved = false;
 		search(maze, maze.getStart());
 	}
 

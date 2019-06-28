@@ -35,7 +35,7 @@ public class View {
 	private ChoiceBox<Generator> cbGenerator = new ChoiceBox<>();
 	private ChoiceBox<Solver> cbSolver = new ChoiceBox<>();
 
-	private final int MAX_VALUE = 80;
+	private final int MAX_VALUE = 80; // TODO: If bigger then drawing issues.
 	private final int INIT_VALUE = 10;
 	private TextField tfHeight = new TextField(INIT_VALUE + "");
 	private TextField tfWidth = new TextField(INIT_VALUE + "");

@@ -120,7 +120,7 @@ public class GameView extends StackPane {
 		gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
 		// TODO: Remove this to remove the background of the canvas.
-		gc.setFill(Color.LIGHTGREY);
+		gc.setFill(Color.LIGHTGRAY);
 		gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
 		setLineLength(maze);

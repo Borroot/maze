@@ -1,4 +1,11 @@
 package com.borroot.solvers;
 
-public class AStarSolver {
+import com.borroot.maze.Maze;
+
+public class AStarSolver implements Solver {
+
+	@Override
+	public void solve(Maze maze) {
+
+	}
 }

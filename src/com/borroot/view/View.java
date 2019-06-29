@@ -39,8 +39,11 @@ public class View {
 	private TextField tfHeight = new TextField(INIT_VALUE + "");
 	private TextField tfWidth = new TextField(INIT_VALUE + "");
 
+	private String btnStrSolve = "Show Solution!";
+	private String btnStrUnsolve = "Hide Solution!";
+
 	private Button btnGenerate = new Button("Generate Maze!");
-	private Button btnSolve = new Button("Show Solution!");
+	private Button btnSolve = new Button(btnStrSolve);
 
 	public View(GameController controller){
 		this.controller = controller;
@@ -105,6 +108,8 @@ public class View {
 		});
 
 		btnSolve.setOnAction(e -> {
+			String text = (btnSolve.getText() == btnStrSolve)? btnStrUnsolve : btnStrSolve;
+			btnSolve.setText(text);
 			controller.btnSolveAction(cbSolver.getValue());
 		});
 	}

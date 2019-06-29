@@ -21,7 +21,11 @@ public class GameController {
 	}
 
 	public void btnSolveAction(Solver solver){
-		solver.solve(maze);
+		if(!maze.isSolved()){
+			solver.solve(maze);
+		}else{
+			solver.unsolve(maze);
+		}
 		draw();
 	}
 

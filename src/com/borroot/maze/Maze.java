@@ -133,17 +133,33 @@ public class Maze {
 	}
 
 	/**
-	 * @return the cell with the start tile in the maze.
+	 * This method is useful for getting the start and finish tile.
+	 * @param tile
+	 * @return the first occurence with the given tile type.
 	 */
-	public Cell getStart(){
+	private Cell getTile(Tile tile){
 		for(int y = 0; y < maze.length; y++){
 			for(int x = 0; x < maze[y].length; x++){
-				if(maze[y][x] == START){
+				if(maze[y][x] == tile){
 					return new Cell(x, y);
 				}
 			}
 		}
 		return new Cell(1, 1);
+	}
+
+	/**
+	 * @return the cell with the start tile in the maze.
+	 */
+	public Cell getStart(){
+		return getTile(START);
+	}
+
+	/**
+	 * @return the cell with the finish tile in the maze.
+	 */
+	public Cell getFinish(){
+		return getTile(FINISH);
 	}
 
 	/**

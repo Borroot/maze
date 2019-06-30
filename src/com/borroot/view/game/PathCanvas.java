@@ -25,6 +25,7 @@ public class PathCanvas extends GameCanvas {
 
 	/**
 	 * Set the gradient and line width settings.
+	 * @param maze
 	 */
 	private void initLineSettings(Maze maze){
 		Cell start = maze.getStart();

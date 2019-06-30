@@ -198,6 +198,14 @@ public class Maze {
 		return x >= 0 && y >= 0 && x < this.getWidth() && y < this.getHeight();
 	}
 
+	/**
+	 * @param cell
+	 * @return if the given cell is in the maze-grid boundaries.
+	 */
+	public boolean validIndex(Cell cell){
+		return validIndex(cell.x, cell.y);
+	}
+
 	@Override
 	public String toString(){
 		StringBuilder builder = new StringBuilder();

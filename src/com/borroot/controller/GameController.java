@@ -21,12 +21,14 @@ public class GameController {
 	}
 
 	public void btnSolveAction(Solver solver){
-		if(!maze.isSolved()){
-			solver.solve(maze);
-		}else{
-			solver.unsolve(maze);
+		if(mazeExists()){
+			if(!maze.isSolved()){
+				solver.solve(maze);
+			}else{
+				solver.unsolve(maze);
+			}
+			draw();
 		}
-		draw();
 	}
 
 	public void generateMaze(Generator generator, int height, int width){
@@ -35,6 +37,10 @@ public class GameController {
 
 		maze.setStart(new Cell(1, maze.getHeight()-1));
 		maze.setFinish(new Cell(maze.getWidth()-1, 1));
+	}
+
+	public boolean mazeExists(){
+		return maze != null;
 	}
 
 	private void draw(){

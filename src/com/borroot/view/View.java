@@ -6,6 +6,7 @@ import com.borroot.generators.BacktrackGenerator;
 import com.borroot.generators.Generator;
 import com.borroot.generators.KruskalGenerator;
 import com.borroot.maze.Maze;
+import com.borroot.solvers.BreathSolver;
 import com.borroot.solvers.DepthSolver;
 import com.borroot.solvers.Solver;
 import com.borroot.view.game.GameView;
@@ -93,7 +94,7 @@ public class View {
 		cbGenerator.setItems(FXCollections.observableArrayList(new BacktrackGenerator(), new KruskalGenerator()));
 		cbGenerator.getSelectionModel().selectFirst();
 
-		cbSolver.setItems(FXCollections.observableArrayList(new DepthSolver()));
+		cbSolver.setItems(FXCollections.observableArrayList(new DepthSolver(), new BreathSolver()));
 		cbSolver.getSelectionModel().selectFirst();
 	}
 
@@ -110,9 +111,11 @@ public class View {
 		});
 
 		btnSolve.setOnAction(e -> {
-			String text = (btnSolve.getText() == btnStrSolve)? btnStrUnsolve : btnStrSolve;
-			btnSolve.setText(text);
-			controller.btnSolveAction(cbSolver.getValue());
+			if(controller.mazeExists()) {
+				String text = (btnSolve.getText() == btnStrSolve) ? btnStrUnsolve : btnStrSolve;
+				btnSolve.setText(text);
+				controller.btnSolveAction(cbSolver.getValue());
+			}
 		});
 	}
 

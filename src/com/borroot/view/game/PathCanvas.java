@@ -4,15 +4,11 @@ import com.borroot.maze.Cell;
 import com.borroot.maze.Direction;
 import com.borroot.maze.Maze;
 import com.borroot.maze.Tile;
-import javafx.scene.effect.ColorInput;
-import javafx.scene.effect.Shadow;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.LinearGradient;
 import javafx.scene.paint.Stop;
-import javafx.scene.shape.FillRule;
 
-import java.awt.*;
 import java.util.LinkedList;
 
 import static com.borroot.maze.Tile.*;
@@ -30,9 +26,13 @@ public class PathCanvas extends GameCanvas {
 	/**
 	 * Set the gradient and line width settings.
 	 */
-	private void initLineSettings(){
-		LinearGradient lg = new LinearGradient(0, 1, 1, 0, true,
-				CycleMethod.REFLECT, new Stop(0.0, Color.DARKBLUE),
+	private void initLineSettings(Maze maze){
+		Cell start = maze.getStart();
+		Cell finish = maze.getFinish();
+
+		LinearGradient lg = new LinearGradient(start.x*LL, start.y*LL, finish.x*LL, finish.y*LL,
+				false, CycleMethod.REFLECT,
+				new Stop(0.0, Color.DARKBLUE),
 				new Stop(1.0, Color.DARKRED));
 
 		gc.setLineWidth(lineWidth * 2);
@@ -82,7 +82,7 @@ public class PathCanvas extends GameCanvas {
 	@Override
 	protected void actualDraw(Maze maze){
 		if(maze.isSolved()){
-			initLineSettings();
+			initLineSettings(maze);
 			drawSolution(maze);
 		}
 	}

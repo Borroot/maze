@@ -34,7 +34,7 @@ public class View {
 	private ChoiceBox<Generator> cbGenerator = new ChoiceBox<>();
 	private ChoiceBox<Solver> cbSolver = new ChoiceBox<>();
 
-	private final int MAX_VALUE = 200; // TODO: If bigger then drawing issues.
+	private final int MAX_VALUE = 80; // TODO: If bigger then drawing issues.
 	private final int INIT_VALUE = 10;
 	private TextField tfHeight = new TextField(INIT_VALUE + "");
 	private TextField tfWidth = new TextField(INIT_VALUE + "");
@@ -77,8 +77,8 @@ public class View {
 
 		Label lblHeight = new Label("Height:");
 		Label lblWidth = new Label("Width:");
-		tfHeight.setPrefWidth(50);
-		tfWidth.setPrefWidth(50);
+		tfHeight.setPrefWidth(40);
+		tfWidth.setPrefWidth(40);
 		initValueListeners();
 
 		hbox.getChildren().addAll(btnGenerate, cbGenerator, lblHeight, tfHeight, lblWidth, tfWidth, btnSolve, cbSolver);
@@ -102,6 +102,8 @@ public class View {
 	 */
 	private void initButtons(){
 		btnGenerate.setOnAction(e -> {
+			btnSolve.setText(btnStrSolve);
+
 			int height = Integer.parseInt(tfHeight.getText());
 			int width = Integer.parseInt(tfWidth.getText());
 			controller.btnGenerateAction(cbGenerator.getValue(), height, width);

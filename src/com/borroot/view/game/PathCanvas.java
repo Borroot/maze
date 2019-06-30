@@ -4,7 +4,15 @@ import com.borroot.maze.Cell;
 import com.borroot.maze.Direction;
 import com.borroot.maze.Maze;
 import com.borroot.maze.Tile;
+import javafx.scene.effect.ColorInput;
+import javafx.scene.effect.Shadow;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.CycleMethod;
+import javafx.scene.paint.LinearGradient;
+import javafx.scene.paint.Stop;
+import javafx.scene.shape.FillRule;
+
+import java.awt.*;
 
 import static com.borroot.maze.Tile.*;
 
@@ -60,6 +68,7 @@ public class PathCanvas extends GameCanvas {
 				}
 			}
 		}
+
 	}
 
 	@Override

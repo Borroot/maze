@@ -51,8 +51,8 @@ public abstract class GameCanvas extends Canvas {
 		lineWidth = LL / 5;
 		lineWidth = (lineWidth % 2 == 0)? lineWidth : lineWidth - 1;
 
-		horizontalPadding = (int)((w - LL * maze.getWidth()) / 2 + 2.5 * lineWidth);
-		verticalPadding = (int)((h - LL * maze.getHeight()) / 2 + 2.5 * lineWidth);
+		horizontalPadding = (int)((w - LL * maze.getWidth()) / 2 + 0.5 * LL);
+		verticalPadding = (int)((h - LL * maze.getHeight()) / 2 + 0.5 * LL);
 
 		gc.setLineWidth(lineWidth);
 		gc.translate(horizontalPadding, verticalPadding);

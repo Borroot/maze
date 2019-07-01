@@ -26,7 +26,7 @@ public interface Solver {
 		for(int y = 0; y < maze.getHeight(); y++){
 			for(int x = 0; x < maze.getWidth(); x++){
 				Cell cell = new Cell(x, y);
-				if(maze.cellVal(cell) == PATH){
+				if(maze.get(cell) == PATH){
 					maze.set(cell, EMPTY);
 				}
 			}

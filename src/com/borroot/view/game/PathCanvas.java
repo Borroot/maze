@@ -50,7 +50,7 @@ public class PathCanvas extends GameCanvas {
 	private Cell nextCell(Maze maze, Cell cur, LinkedList<Cell> drawnCells){
 		for(Direction dir : Direction.values()){
 			Cell next = new Cell(cur.x + dir.getX(), cur.y + dir.getY());
-			if(!drawnCells.contains(next) && maze.cellVal(next) == PATH){
+			if(!drawnCells.contains(next) && maze.get(next) == PATH){
 				return next;
 			}
 		}

@@ -2,6 +2,7 @@ package com.borroot.controller;
 
 import com.borroot.generators.Generator;
 import com.borroot.maze.Cell;
+import com.borroot.maze.Direction;
 import com.borroot.maze.Maze;
 import com.borroot.solvers.Solver;
 import com.borroot.view.View;
@@ -12,38 +13,15 @@ import com.borroot.view.View;
  */
 public class GameController {
 
-	private final int TICK = 100;
-	private boolean running = false;
-
 	private View view;
 	private Maze maze;
 
 	public GameController(){
 		 view = new View(this);
-//		 runGameLoop();
 	}
 
-	private void runGameLoop(){
-		running = true;
-		new Thread(() -> {
-			gameLoop();
-		}).start();
-	}
+	public void movePlayer(Direction dir){
 
-	private void gameLoop(){
-		while(running){
-
-
-			if(mazeExists()){
-				draw();
-			}
-
-			try{
-				Thread.sleep(TICK);
-			}catch(Exception e){
-				e.printStackTrace();
-			}
-		}
 	}
 
 	/**

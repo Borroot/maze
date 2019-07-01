@@ -21,7 +21,7 @@ public class DepthSolver implements Solver {
 	private boolean freeAtDir(Maze maze, Cell from, Direction dir){
 		Cell to = new Cell(from.x + dir.getX(), from.y + dir.getY());
 		try{
-			return maze.cellVal(to) == EMPTY;
+			return maze.get(to) == EMPTY;
 		}catch(ArrayIndexOutOfBoundsException e){
 			return false;
 		}

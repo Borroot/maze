@@ -89,7 +89,7 @@ public class BreathSolver implements Solver {
 			for(Direction dir : Direction.values()){
 				CellP nextP = new CellP(new Cell(cellP.getCell().x + dir.getX(), cellP.getCell().y + dir.getY()));
 				if(maze.validIndex(nextP.getCell())){
-					if(!discovered.contains(nextP) && maze.cellVal(nextP.getCell()) == EMPTY){
+					if(!discovered.contains(nextP) && maze.get(nextP.getCell()) == EMPTY){
 						discovered.add(nextP);
 						nextP.setParent(cellP);
 						queue.add(nextP);

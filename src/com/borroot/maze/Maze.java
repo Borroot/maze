@@ -12,28 +12,13 @@ import static com.borroot.maze.Tile.*;
  */
 public class Maze {
 
-	private static final int DEFAULT_SIZE = 5;
 	private Tile maze[][];
 
 	private Cell start;
 	private Cell finish;
+	private Cell player;
 
 	private boolean solved = false;
-
-	/**
-	 * Make a maze with the default size.
-	 */
-	public Maze(){
-		this(DEFAULT_SIZE, DEFAULT_SIZE);
-	}
-
-	/**
-	 * Make a maze with n*n size.
-	 * @param SIZE
-	 */
-	public Maze(final int SIZE){
-		this(SIZE, SIZE);
-	}
 
 	/**
 	 * Make a maze with the specified height and width.
@@ -43,14 +28,14 @@ public class Maze {
 	public Maze(final int HEIGHT, final int WIDTH){
 		if(HEIGHT > 0 && WIDTH > 0){
 			maze = new Tile[HEIGHT * 2 + 1][WIDTH * 2 + 1];
-			init();
+			initGrid();
 		}
 	}
 
 	/**
 	 * Initialize the maze to a grid with cells al having four walls.
 	 */
-	public void init(){
+	public void initGrid(){
 		for(int y = 0; y < maze.length; y++){
 			for(int x = 0; x < maze[y].length; x++){
 				if(y % 2 == 0 || x % 2 == 0){
@@ -127,12 +112,21 @@ public class Maze {
 		return maze[cell.y][cell.x];
 	}
 
+	public void setPlayer(Cell player){
+		this.player = player;
+	}
+
+	public Cell getPlayer(){
+		return player;
+	}
+
 	/**
 	 * Set the cell to a start tile.
 	 * @param start
 	 */
 	public void setStart(Cell start){
 		this.start = start;
+		this.player = start;
 		set(start, EMPTY);
 	}
 
@@ -160,39 +154,11 @@ public class Maze {
 	}
 
 	/**
-	 * Remove the wall between cell c1 and cell c2.
-	 * @param c1
-	 * @param c2
-	 */
-	public void removeWall(Cell c1, Cell c2){
-		Cell wall = new Cell((c1.x+c2.x)/2, (c1.y+c2.y)/2);
-		maze[wall.y][wall.x] = EMPTY;
-	}
-
-	/**
-	 * Use this function to get the tile value of a cell.
-	 * @param cell with x and y coordinates in the maze.
-	 * @return the corresponding tile value.
-	 */
-	public Tile cellVal(Cell cell){
-		return maze[cell.y][cell.x];
-	}
-
-	/**
-	 * @param x
-	 * @param y
-	 * @return if the given x and y value are in the maze-grid boundaries.
-	 */
-	public boolean validIndex(int x, int y){
-		return x >= 0 && y >= 0 && x < this.getWidth() && y < this.getHeight();
-	}
-
-	/**
 	 * @param cell
 	 * @return if the given cell is in the maze-grid boundaries.
 	 */
 	public boolean validIndex(Cell cell){
-		return validIndex(cell.x, cell.y);
+		return cell.x >= 0 && cell.y >= 0 && cell.x < this.getWidth() && cell.y < this.getHeight();
 	}
 
 	@Override

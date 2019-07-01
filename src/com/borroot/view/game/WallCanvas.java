@@ -24,7 +24,7 @@ public class WallCanvas extends GameCanvas {
 	 */
 	private boolean validWall(Maze maze, int x, int y){
 		Cell c = new Cell(x, y);
-		return maze.validIndex(x, y) && maze.cellVal(c) == WALL;
+		return maze.validIndex(c) && maze.get(c) == WALL;
 	}
 
 	/**

@@ -7,6 +7,8 @@ import com.borroot.maze.Maze;
 import java.util.LinkedList;
 import java.util.concurrent.ThreadLocalRandom;
 
+import static com.borroot.maze.Tile.EMPTY;
+
 /**
  * Generate a maze using depth-first search recursive backtracking.
  *
@@ -33,6 +35,16 @@ public class BacktrackGenerator implements Generator {
 	 */
 	private boolean validCell(Maze maze, Cell cell){
 		return cell.x >= 0 && cell.y >= 0 && cell.y < maze.getHeight() && cell.x < maze.getWidth();
+	}
+
+	/**
+	 * Remove the wall between cell c1 and cell c2.
+	 * @param c1
+	 * @param c2
+	 */
+	public void removeWall(Maze maze, Cell c1, Cell c2){
+		Cell wall = new Cell((c1.x+c2.x)/2, (c1.y+c2.y)/2);
+		maze.set(wall, EMPTY);
 	}
 
 	/**
@@ -107,7 +119,7 @@ public class BacktrackGenerator implements Generator {
 		while(unvisited.size() > 0){
 			if(hasUnvisitedNeighbors(maze, current, unvisited)){
 				Cell neighbor = randomUnvisitedNeighbor(maze, current, unvisited);
-				maze.removeWall(current, neighbor);
+				removeWall(maze, current, neighbor);
 
 				current = neighbor;
 				unvisited.remove(current);

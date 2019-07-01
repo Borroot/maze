@@ -71,17 +71,23 @@ public class View {
 		window.show();
 	}
 
+	/**
+	 * Initialize the listeners for a change in the width/height of the gameview.
+	 * Whenever the size changes the maze is redrawn.
+	 */
 	private void initListener(){
-		Stage window = Main.getWindow();
-		window.heightProperty().addListener(e -> {
-			System.out.println(window.heightProperty().getValue());
-			gameView.resize();
-			if(controller.mazeExists()){
-				draw(controller.getMaze());
-			}
-		});
+		gameView.heightProperty().addListener(e -> redraw());
+		gameView.widthProperty().addListener(e -> redraw());
 	}
 
+	/**
+	 * Redraw the maze if it exists.
+	 */
+	private void redraw(){
+		if(controller.mazeExists()){
+			draw(controller.getMaze());
+		}
+	}
 
 	/**
 	 * Initialize the settings at the bottom of the window.

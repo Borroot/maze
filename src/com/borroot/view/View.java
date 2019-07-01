@@ -242,8 +242,9 @@ public class View {
 	/**
 	 * Show the finish screen.
 	 */
-	public void finished(){
-		String wintext = (peeked)? "YOU PEEKED AT THE SOLUTION!\nHOW DOES THAT MAKE YOU FEEL, HUH?" : "YOU SOLVED IT";
+	public void finished(int w, int h){
+		String wintext = (peeked)? "YOU PEEKED AT THE SOLUTION!\nHOW DOES THAT MAKE YOU FEEL, HUH?" :
+				"YOU SOLVED A " + w + "x" + h + " MAZE!";
 		Label lblSolved = new Label(wintext);
 		Label lblClick = new Label("Click to go back");
 		lblSolved.setFont(new Font(40));

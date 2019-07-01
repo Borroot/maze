@@ -34,7 +34,7 @@ public class GameController {
 			if(maze.validIndex(newP) && maze.get(newP) != WALL) {
 				maze.setPlayer(newP);
 				if(newP.equals(maze.getFinish())){
-					view.finished();
+					view.finished((maze.getWidth()-1)/2, (maze.getHeight()-1)/2);
 				}
 			}
 			draw();

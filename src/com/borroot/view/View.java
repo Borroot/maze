@@ -254,7 +254,7 @@ public class View {
 
 		fscene.setOnMouseClicked(e -> {
 			double width = window.getWidth();
-			double height = windowt.getHeight();
+			double height = window.getHeight();
 
 			window.setScene(this.scene);
 			window.setWidth(width);

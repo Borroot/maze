@@ -6,5 +6,6 @@ public class PlayerCanvas extends GameCanvas {
 
 	@Override
 	protected void actualDraw(Maze maze) {
+
 	}
 }

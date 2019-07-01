@@ -48,21 +48,6 @@ public class Maze {
 	}
 
 	/**
-	 * Set the value of solved.
-	 * @param solved if the maze is solved.
-	 */
-	public void setSolved(boolean solved){
-		this.solved = solved;
-	}
-
-	/**
-	 * @return if the maze is solved.
-	 */
-	public boolean isSolved(){
-		return solved;
-	}
-
-	/**
 	 * Use this function to get all the cells in the maze.
 	 * @return a list containing all the non-wall cells.
 	 */
@@ -96,12 +81,33 @@ public class Maze {
 		return cells;
 	}
 
+	/**
+	 * @return the height of the maze.
+	 */
 	public int getHeight(){
 		return maze.length;
 	}
 
+	/**
+	 * @return the width of the maze.
+	 */
 	public int getWidth(){
 		return maze[0].length;
+	}
+
+	/**
+	 * Set the value of solved.
+	 * @param solved if the maze is solved.
+	 */
+	public void setSolved(boolean solved){
+		this.solved = solved;
+	}
+
+	/**
+	 * @return if the maze is solved.
+	 */
+	public boolean isSolved(){
+		return solved;
 	}
 
 	public void set(Cell cell, Tile tile){
@@ -138,19 +144,19 @@ public class Maze {
 	}
 
 	/**
-	 * @return the cell with the finish tile in the maze.
-	 */
-	public Cell getFinish(){
-		return finish;
-	}
-
-	/**
 	 * Set the cell to a finish tile.
 	 * @param finish
 	 */
 	public void setFinish(Cell finish){
 		this.finish = finish;
 		set(finish, EMPTY);
+	}
+
+	/**
+	 * @return the cell with the finish tile in the maze.
+	 */
+	public Cell getFinish(){
+		return finish;
 	}
 
 	/**

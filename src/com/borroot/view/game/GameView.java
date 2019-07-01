@@ -1,6 +1,7 @@
 package com.borroot.view.game;
 
 import com.borroot.maze.Maze;
+import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 
 /**
@@ -9,11 +10,8 @@ import javafx.scene.layout.Pane;
  */
 public class GameView extends Pane {
 
-	private WallCanvas wallCanvas = new WallCanvas();
-	private PathCanvas pathCanvas = new PathCanvas();
-
 	public GameView(){
-		this.getChildren().addAll(wallCanvas, pathCanvas);
+		this.getChildren().addAll(new WallCanvas(), new PathCanvas(), new PlayerCanvas());
 	}
 
 	/**
@@ -21,7 +19,10 @@ public class GameView extends Pane {
 	 * @param maze
 	 */
 	public void draw(Maze maze){
-		wallCanvas.draw(maze, this.getHeight(), this.getWidth());
-		pathCanvas.draw(maze, this.getHeight(), this.getWidth());
+		for(Node node : this.getChildren()){
+			if(node instanceof GameCanvas) {
+				((GameCanvas) node).draw(maze, this.getHeight(), this.getWidth());
+			}
+		}
 	}
 }

@@ -226,8 +226,8 @@ public class View {
 			tf.setText(newVal.replaceAll("[^\\d]", ""));
 		}else if(!tf.getText().equals("")){
 			int val = Integer.parseInt(newVal);
-			if(val < 2){
-				tf.setText("2");
+			if(val < 1){
+				tf.setText("1");
 			}else if(val > MAX_VALUE){
 				tf.setText(MAX_VALUE + "");
 			}
@@ -254,7 +254,7 @@ public class View {
 
 		fscene.setOnMouseClicked(e -> {
 			double width = window.getWidth();
-			double height = window.getHeight();
+			double height = windowt.getHeight();
 
 			window.setScene(this.scene);
 			window.setWidth(width);

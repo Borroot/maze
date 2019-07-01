@@ -16,12 +16,12 @@ public class DepthSolver implements Solver {
 	 * @param maze
 	 * @param from
 	 * @param dir
-	 * @return if the cell in the given direction is free (non-wall and non-path).
+	 * @return if the cell in the given direction is empty.
 	 */
 	private boolean freeAtDir(Maze maze, Cell from, Direction dir){
 		Cell to = new Cell(from.x + dir.getX(), from.y + dir.getY());
 		try{
-			return !(maze.cellVal(to) == WALL || maze.cellVal(to) == PATH);
+			return maze.cellVal(to) == EMPTY;
 		}catch(ArrayIndexOutOfBoundsException e){
 			return false;
 		}
@@ -33,13 +33,12 @@ public class DepthSolver implements Solver {
 	 * @param current
 	 */
 	private void search(Maze maze, Cell current){
-		if(maze.cellVal(current) == FINISH){
+		if(current.equals(maze.getFinish())){
 			maze.setSolved(true);
 			return;
 		}
 
-		if(maze.cellVal(current) != START)
-			maze.set(current, PATH);
+		maze.set(current, PATH);
 
 		for(Direction dir : Direction.values()){
 			if(!maze.isSolved() && freeAtDir(maze, current, dir)){
@@ -48,8 +47,9 @@ public class DepthSolver implements Solver {
 			}
 		}
 
-		if(!maze.isSolved() && maze.cellVal(current) != START)
+		if(!maze.isSolved()){
 			maze.set(current, EMPTY);
+		}
 	}
 
 	@Override

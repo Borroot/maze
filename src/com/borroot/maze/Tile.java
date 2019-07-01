@@ -5,5 +5,5 @@ package com.borroot.maze;
  * @author Bram Pulles
  */
 public enum Tile {
-	EMPTY, WALL, START, FINISH, PATH;
+	EMPTY, WALL, PATH;
 }

@@ -12,15 +12,38 @@ import com.borroot.view.View;
  */
 public class GameController {
 
+	private final int TICK = 100;
+	private boolean running = false;
+
 	private View view;
 	private Maze maze;
 
 	public GameController(){
 		 view = new View(this);
+//		 runGameLoop();
+	}
+
+	private void runGameLoop(){
+		running = true;
+		new Thread(() -> {
+			gameLoop();
+		}).start();
 	}
 
 	private void gameLoop(){
+		while(running){
 
+
+			if(mazeExists()){
+				draw();
+			}
+
+			try{
+				Thread.sleep(TICK);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}
 	}
 
 	/**

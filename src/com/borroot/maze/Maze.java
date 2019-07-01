@@ -15,6 +15,9 @@ public class Maze {
 	private static final int DEFAULT_SIZE = 5;
 	private Tile maze[][];
 
+	private Cell start;
+	private Cell finish;
+
 	private boolean solved = false;
 
 	/**
@@ -126,48 +129,34 @@ public class Maze {
 
 	/**
 	 * Set the cell to a start tile.
-	 * @param cell
+	 * @param start
 	 */
-	public void setStart(Cell cell){
-		maze[cell.y][cell.x] = START;
-	}
-
-	/**
-	 * This method is useful for getting the start and finish tile.
-	 * @param tile
-	 * @return the first occurence with the given tile type.
-	 */
-	private Cell getTile(Tile tile){
-		for(int y = 0; y < maze.length; y++){
-			for(int x = 0; x < maze[y].length; x++){
-				if(maze[y][x] == tile){
-					return new Cell(x, y);
-				}
-			}
-		}
-		return new Cell(1, 1);
+	public void setStart(Cell start){
+		this.start = start;
+		set(start, EMPTY);
 	}
 
 	/**
 	 * @return the cell with the start tile in the maze.
 	 */
 	public Cell getStart(){
-		return getTile(START);
+		return start;
 	}
 
 	/**
 	 * @return the cell with the finish tile in the maze.
 	 */
 	public Cell getFinish(){
-		return getTile(FINISH);
+		return finish;
 	}
 
 	/**
 	 * Set the cell to a finish tile.
-	 * @param cell
+	 * @param finish
 	 */
-	public void setFinish(Cell cell){
-		maze[cell.y][cell.x] = FINISH;
+	public void setFinish(Cell finish){
+		this.finish = finish;
+		set(finish, EMPTY);
 	}
 
 	/**
@@ -212,25 +201,26 @@ public class Maze {
 
 		for(int y = 0; y < maze.length; y++){
 			for(int x = 0; x < maze[y].length; x++){
-				switch (maze[y][x]){
-					case WALL:
-						if(y % 2 == 0){
-							builder.append("-");
-						}else{
-							builder.append("|");
-						}
-						break;
-					case EMPTY:
-						builder.append(" ");
-						break;
-					case START:
-						builder.append("S");
-						break;
-					case FINISH:
-						builder.append("F");
-						break;
-					case PATH:
-						builder.append("X");
+				Cell cell = new Cell(x, y);
+				if(cell.equals(start)){
+					builder.append("S");
+				}else if(cell.equals(finish)){
+					builder.append("F");
+				}else {
+					switch (maze[y][x]) {
+						case WALL:
+							if (y % 2 == 0) {
+								builder.append("-");
+							} else {
+								builder.append("|");
+							}
+							break;
+						case EMPTY:
+							builder.append(" ");
+							break;
+						case PATH:
+							builder.append("X");
+					}
 				}
 				builder.append(" ");
 			}

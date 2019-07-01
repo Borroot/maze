@@ -50,8 +50,7 @@ public class PathCanvas extends GameCanvas {
 	private Cell nextCell(Maze maze, Cell cur, LinkedList<Cell> drawnCells){
 		for(Direction dir : Direction.values()){
 			Cell next = new Cell(cur.x + dir.getX(), cur.y + dir.getY());
-			Tile t = maze.cellVal(next);
-			if(!drawnCells.contains(next) && (t == PATH || t == START || t == FINISH)){
+			if(!drawnCells.contains(next) && maze.cellVal(next) == PATH){
 				return next;
 			}
 		}
@@ -66,15 +65,17 @@ public class PathCanvas extends GameCanvas {
 		gc.beginPath();
 
 		Cell cur = maze.getStart();
-		Cell finish = maze.getFinish();
 		LinkedList<Cell> drawnCells = new LinkedList<>();
 
-		do{
+		while(cur != null){
+			gc.lineTo(cur.x * LL, cur.y * LL);
 			gc.moveTo(cur.x * LL, cur.y * LL);
 			drawnCells.add(cur);
 			cur = nextCell(maze, cur, drawnCells);
-			gc.lineTo(cur.x * LL, cur.y * LL);
-		}while(!cur.equals(finish));
+		}
+
+		Cell finish = maze.getFinish();
+		gc.lineTo(finish.x * LL, finish.y * LL);
 
 		gc.closePath();
 		gc.stroke();

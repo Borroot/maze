@@ -23,7 +23,8 @@ public class WallCanvas extends GameCanvas {
 	 * @return if the given position is a wall within the boundaries of the maze.
 	 */
 	private boolean validWall(Maze maze, int x, int y){
-		return maze.validIndex(x, y) && maze.cellVal(new Cell(x, y)) == WALL;
+		Cell c = new Cell(x, y);
+		return maze.validIndex(x, y) && maze.cellVal(c) == WALL;
 	}
 
 	/**

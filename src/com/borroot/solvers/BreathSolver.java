@@ -3,7 +3,6 @@ package com.borroot.solvers;
 import com.borroot.maze.Cell;
 import com.borroot.maze.Direction;
 import com.borroot.maze.Maze;
-import com.borroot.maze.Tile;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -66,9 +65,7 @@ public class BreathSolver implements Solver {
 	private void setPath(Maze maze, CellP cell){
 		do{
 			cell = cell.getParent();
-			if(maze.cellVal(cell.getCell()) != START){
-				maze.set(cell.getCell(), PATH);
-			}
+			maze.set(cell.getCell(), PATH);
 		}while(cell.getParent() != null);
 	}
 
@@ -83,7 +80,7 @@ public class BreathSolver implements Solver {
 		while(!queue.isEmpty()){
 			CellP cellP = queue.remove();
 
-			if(maze.validIndex(cellP.getCell()) && maze.cellVal(cellP.getCell()) == FINISH){
+			if(maze.validIndex(cellP.getCell()) && cellP.getCell().equals(maze.getFinish())){
 				setPath(maze, cellP);
 				maze.setSolved(true);
 				return;
@@ -92,8 +89,7 @@ public class BreathSolver implements Solver {
 			for(Direction dir : Direction.values()){
 				CellP nextP = new CellP(new Cell(cellP.getCell().x + dir.getX(), cellP.getCell().y + dir.getY()));
 				if(maze.validIndex(nextP.getCell())){
-					Tile t = maze.cellVal(nextP.getCell());
-					if(!discovered.contains(nextP) && (t == EMPTY || t == FINISH)){
+					if(!discovered.contains(nextP) && maze.cellVal(nextP.getCell()) == EMPTY){
 						discovered.add(nextP);
 						nextP.setParent(cellP);
 						queue.add(nextP);

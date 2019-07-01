@@ -53,6 +53,8 @@ public class View {
 	private Button btnGenerate = new Button("Generate Maze!");
 	private Button btnSolve = new Button(btnStrSolve);
 
+	private boolean peeked = false;
+
 	public View(GameController controller){
 		this.controller = controller;
 		init();
@@ -181,6 +183,7 @@ public class View {
 	 */
 	private void initButtons(){
 		btnGenerate.setOnAction(e -> {
+			peeked = false;
 			btnSolve.setText(btnStrSolve);
 
 			int height = Integer.parseInt(tfHeight.getText());
@@ -190,6 +193,7 @@ public class View {
 
 		btnSolve.setOnAction(e -> {
 			if(controller.mazeExists()) {
+				peeked = true;
 				String text = (btnSolve.getText() == btnStrSolve) ? btnStrUnsolve : btnStrSolve;
 				btnSolve.setText(text);
 				controller.solveAction(cbSolver.getValue());
@@ -239,7 +243,8 @@ public class View {
 	 * Show the finish screen.
 	 */
 	public void finished(){
-		Label lblSolved = new Label("YOU SOLVED IT!!");
+		String wintext = (peeked)? "YOU PEEKED AT THE SOLUTION!\nHOW DOES THAT MAKE YOU FEEL, HUH?" : "YOU SOLVED IT";
+		Label lblSolved = new Label(wintext);
 		Label lblClick = new Label("Click to go back");
 		lblSolved.setFont(new Font(40));
 		lblClick.setFont(Font.font("Serif", FontPosture.ITALIC, 20));

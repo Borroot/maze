@@ -226,8 +226,8 @@ public class View {
 			tf.setText(newVal.replaceAll("[^\\d]", ""));
 		}else if(!tf.getText().equals("")){
 			int val = Integer.parseInt(newVal);
-			if(val < 1){
-				tf.setText("1");
+			if(val < 2){
+				tf.setText("2");
 			}else if(val > MAX_VALUE){
 				tf.setText(MAX_VALUE + "");
 			}
@@ -248,10 +248,18 @@ public class View {
 		vbox.setAlignment(Pos.CENTER);
 
 		Stage window = Main.getWindow();
-		Scene fscene = new Scene(vbox, window.getWidth(), window.getHeight());
+		Scene fscene = new Scene(vbox, scene.getWidth(), scene.getHeight());
 		window.setScene(fscene);
 
-		fscene.setOnMouseClicked(e -> window.setScene(this.scene));
+
+		fscene.setOnMouseClicked(e -> {
+			double width = window.getWidth();
+			double height = window.getHeight();
+
+			window.setScene(this.scene);
+			window.setWidth(width);
+			window.setHeight(height);
+		});
 
 		controller.resetPlayer();
 	}

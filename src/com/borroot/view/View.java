@@ -5,6 +5,7 @@ import com.borroot.controller.GameController;
 import com.borroot.generators.BacktrackGenerator;
 import com.borroot.generators.Generator;
 import com.borroot.generators.KruskalGenerator;
+import com.borroot.maze.Direction;
 import com.borroot.maze.Maze;
 import com.borroot.solvers.BreathSolver;
 import com.borroot.solvers.DepthSolver;
@@ -15,10 +16,13 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+
+import static com.borroot.maze.Direction.*;
 
 public class View {
 
@@ -27,6 +31,7 @@ public class View {
 	private GameController controller;
 
 	private BorderPane root = new BorderPane();
+	private Scene scene;
 
 	private GameView gameView = new GameView();
 	private HBox hbox = new HBox(20);
@@ -54,29 +59,69 @@ public class View {
 	 * Initialize the window.
 	 */
 	private void init(){
-		initListener();
 		initSettings();
 
 		root.setCenter(gameView);
 		root.setBottom(hbox);
 		root.setPadding(new Insets(10, 10, 10, 10));
 
-		Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
+		scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
 
 		Stage window = Main.getWindow();
 		window.setMinWidth(953);
 		window.setScene(scene);
 		window.setTitle("Generate Mazes!");
 		window.show();
+
+		initListeners();
+	}
+
+	/**
+	 * Initialize the size listener and the keystroke listener.
+	 */
+	private void initListeners(){
+		initListenerSize();
+		initListenerKeyStroke();
 	}
 
 	/**
 	 * Initialize the listeners for a change in the width/height of the gameview.
 	 * Whenever the size changes the maze is redrawn.
 	 */
-	private void initListener(){
+	private void initListenerSize(){
 		gameView.heightProperty().addListener(e -> redraw());
 		gameView.widthProperty().addListener(e -> redraw());
+	}
+
+	/**
+	 * Whenever a key is pressed sent the controller the direction.
+	 */
+	private void initListenerKeyStroke(){
+		scene.setOnKeyPressed(e -> {
+			Direction dir;
+
+			switch(e.getCode()){
+				case UP:
+					dir = NORTH;
+					break;
+				case RIGHT:
+					dir = EAST;
+					break;
+				case DOWN:
+					dir = SOUTH;
+					break;
+				case LEFT:
+					dir = WEST;
+					break;
+				default:
+					dir = null;
+			}
+
+			if(dir != null){
+				controller.movePlayer(dir);
+			}
+		});
+
 	}
 
 	/**
@@ -104,6 +149,17 @@ public class View {
 		hbox.getChildren().addAll(btnGenerate, cbGenerator, lblHeight, tfHeight, lblWidth, tfWidth, btnSolve, cbSolver);
 		hbox.setAlignment(Pos.BASELINE_CENTER);
 		hbox.setPadding(new Insets(10, 10, 10, 10));
+
+		initNoFocus();
+	}
+
+	/**
+	 * Make sure that the settings are not affected by pressing the movement keys.
+	 */
+	private void initNoFocus(){
+		for(Node node : hbox.getChildren()){
+			node.setFocusTraversable(false);
+		}
 	}
 
 	/**

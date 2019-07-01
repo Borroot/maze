@@ -7,6 +7,8 @@ import com.borroot.maze.Maze;
 import com.borroot.solvers.Solver;
 import com.borroot.view.View;
 
+import static com.borroot.maze.Tile.EMPTY;
+
 /**
  * This class handles the game logic.
  * @author Bram Pulles
@@ -21,7 +23,14 @@ public class GameController {
 	}
 
 	public void movePlayer(Direction dir){
-
+		if(mazeExists()) {
+			Cell curP = maze.getPlayer();
+			Cell newP = new Cell(curP.x + dir.getX(), curP.y + dir.getY());
+			if(maze.validIndex(newP) && maze.get(newP) == EMPTY) {
+				maze.setPlayer(newP);
+			}
+			draw();
+		}
 	}
 
 	/**

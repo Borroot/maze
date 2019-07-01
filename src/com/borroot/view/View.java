@@ -9,6 +9,7 @@ import com.borroot.maze.Direction;
 import com.borroot.maze.Maze;
 import com.borroot.solvers.BreathSolver;
 import com.borroot.solvers.DepthSolver;
+import com.borroot.solvers.IterativeSolver;
 import com.borroot.solvers.Solver;
 import com.borroot.view.game.GameView;
 import javafx.beans.value.ChangeListener;
@@ -171,7 +172,7 @@ public class View {
 		cbGenerator.setItems(FXCollections.observableArrayList(new BacktrackGenerator(), new KruskalGenerator()));
 		cbGenerator.getSelectionModel().selectFirst();
 
-		cbSolver.setItems(FXCollections.observableArrayList(new DepthSolver(), new BreathSolver()));
+		cbSolver.setItems(FXCollections.observableArrayList(new DepthSolver(), new BreathSolver(), new IterativeSolver()));
 		cbSolver.getSelectionModel().selectFirst();
 	}
 

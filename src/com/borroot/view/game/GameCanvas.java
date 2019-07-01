@@ -84,7 +84,6 @@ public abstract class GameCanvas extends Canvas {
 	 */
 	protected void draw(Maze maze, double h, double w){
 		prepare(maze, h, w);
-		System.out.println(this + ", LL:" + LL + ", LW:" + lineWidth);
 		actualDraw(maze);
 	}
 

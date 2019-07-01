@@ -6,6 +6,10 @@ import com.borroot.maze.Maze;
 import com.borroot.solvers.Solver;
 import com.borroot.view.View;
 
+/**
+ * This class handles the game logic.
+ * @author Bram Pulles
+ */
 public class GameController {
 
 	private View view;
@@ -15,12 +19,26 @@ public class GameController {
 		 view = new View(this);
 	}
 
-	public void btnGenerateAction(Generator generator, int height, int width){
+	private void gameLoop(){
+
+	}
+
+	/**
+	 * This function is called when the 'generate maze' button is called.
+	 * @param generator
+	 * @param height
+	 * @param width
+	 */
+	public void generateAction(Generator generator, int height, int width){
 		generateMaze(generator, height, width);
 		draw();
 	}
 
-	public void btnSolveAction(Solver solver){
+	/**
+	 * This function is called when the 'solve maze' button is called.
+	 * @param solver
+	 */
+	public void solveAction(Solver solver){
 		if(mazeExists()){
 			if(!maze.isSolved()){
 				solver.solve(maze);
@@ -31,6 +49,12 @@ public class GameController {
 		}
 	}
 
+	/**
+	 * Generate a maze with the specified generator and size.
+	 * @param generator
+	 * @param height
+	 * @param width
+	 */
 	public void generateMaze(Generator generator, int height, int width){
 		maze = new Maze(height, width);
 		generator.generate(maze);
@@ -39,14 +63,23 @@ public class GameController {
 		maze.setFinish(new Cell(maze.getWidth()-1, 1));
 	}
 
+	/**
+	 * @return if there is a maze.
+	 */
 	public boolean mazeExists(){
 		return maze != null;
 	}
 
+	/**
+	 * @return the maze.
+	 */
 	public Maze getMaze(){
 		return maze;
 	}
 
+	/**
+	 * Draw the maze.
+	 */
 	private void draw(){
 		view.draw(maze);
 	}

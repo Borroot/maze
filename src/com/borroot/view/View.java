@@ -127,14 +127,14 @@ public class View {
 
 			int height = Integer.parseInt(tfHeight.getText());
 			int width = Integer.parseInt(tfWidth.getText());
-			controller.btnGenerateAction(cbGenerator.getValue(), height, width);
+			controller.generateAction(cbGenerator.getValue(), height, width);
 		});
 
 		btnSolve.setOnAction(e -> {
 			if(controller.mazeExists()) {
 				String text = (btnSolve.getText() == btnStrSolve) ? btnStrUnsolve : btnStrSolve;
 				btnSolve.setText(text);
-				controller.btnSolveAction(cbSolver.getValue());
+				controller.solveAction(cbSolver.getValue());
 			}
 		});
 	}

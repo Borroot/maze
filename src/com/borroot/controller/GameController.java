@@ -43,6 +43,10 @@ public class GameController {
 		return maze != null;
 	}
 
+	public Maze getMaze(){
+		return maze;
+	}
+
 	private void draw(){
 		view.draw(maze);
 	}

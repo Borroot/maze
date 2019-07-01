@@ -17,8 +17,8 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class View {
@@ -55,6 +55,7 @@ public class View {
 	 * Initialize the window.
 	 */
 	private void init(){
+		initListener();
 		initSettings();
 
 		root.setCenter(gameView);
@@ -64,10 +65,23 @@ public class View {
 		Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
 
 		Stage window = Main.getWindow();
+		window.setMinWidth(953);
 		window.setScene(scene);
 		window.setTitle("Generate Mazes!");
 		window.show();
 	}
+
+	private void initListener(){
+		Stage window = Main.getWindow();
+		window.heightProperty().addListener(e -> {
+			System.out.println(window.heightProperty().getValue());
+			gameView.resize();
+			if(controller.mazeExists()){
+				draw(controller.getMaze());
+			}
+		});
+	}
+
 
 	/**
 	 * Initialize the settings at the bottom of the window.

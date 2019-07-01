@@ -151,7 +151,7 @@ public class View {
 		tfWidth.setPrefWidth(40);
 		initValueListeners();
 
-		hbox.getChildren().addAll(btnGenerate, cbGenerator, lblHeight, tfHeight, lblWidth, tfWidth, btnSolve, cbSolver);
+		hbox.getChildren().addAll(btnGenerate, cbGenerator, lblWidth, tfWidth, lblHeight, tfHeight, btnSolve, cbSolver);
 		hbox.setAlignment(Pos.BASELINE_CENTER);
 		hbox.setPadding(new Insets(10, 10, 10, 10));
 
@@ -241,9 +241,11 @@ public class View {
 
 	/**
 	 * Show the finish screen.
+	 * @param w width of the maze in cells.
+	 * @param h height of the maze in cells.
 	 */
 	public void finished(int w, int h){
-		String wintext = (peeked)? "YOU PEEKED AT THE SOLUTION!\nHOW DOES THAT MAKE YOU FEEL, HUH?" :
+		String wintext = (peeked)? "YOU PEEKED AT THE SOLUTION!\nI AM PAYING CLOSE ATTENTION.." :
 				"YOU SOLVED A " + w + "x" + h + " MAZE!";
 		Label lblSolved = new Label(wintext);
 		Label lblClick = new Label("Click to go back");

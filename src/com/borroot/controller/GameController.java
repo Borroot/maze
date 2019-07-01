@@ -7,7 +7,7 @@ import com.borroot.maze.Maze;
 import com.borroot.solvers.Solver;
 import com.borroot.view.View;
 
-import static com.borroot.maze.Tile.EMPTY;
+import static com.borroot.maze.Tile.WALL;
 
 /**
  * This class handles the game logic.
@@ -26,7 +26,7 @@ public class GameController {
 		if(mazeExists()) {
 			Cell curP = maze.getPlayer();
 			Cell newP = new Cell(curP.x + dir.getX(), curP.y + dir.getY());
-			if(maze.validIndex(newP) && maze.get(newP) == EMPTY) {
+			if(maze.validIndex(newP) && maze.get(newP) != WALL) {
 				maze.setPlayer(newP);
 			}
 			draw();

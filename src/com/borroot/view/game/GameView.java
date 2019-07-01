@@ -12,6 +12,7 @@ public class GameView extends Pane {
 
 	public GameView(){
 		this.getChildren().addAll(new WallCanvas(), new PathCanvas(), new PlayerCanvas());
+		this.setOnMouseClicked(e -> requestFocus());
 	}
 
 	/**

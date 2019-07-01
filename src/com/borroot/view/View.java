@@ -20,6 +20,8 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
 import javafx.stage.Stage;
 
 import static com.borroot.maze.Direction.*;
@@ -230,6 +232,28 @@ public class View {
 				tf.setText(MAX_VALUE + "");
 			}
 		}
+	}
+
+	/**
+	 * Show the finish screen.
+	 */
+	public void finished(){
+		Label lblSolved = new Label("YOU SOLVED IT!!");
+		Label lblClick = new Label("Click to go back");
+		lblSolved.setFont(new Font(40));
+		lblClick.setFont(Font.font("Serif", FontPosture.ITALIC, 20));
+
+		VBox vbox = new VBox(10);
+		vbox.getChildren().addAll(lblSolved, lblClick);
+		vbox.setAlignment(Pos.CENTER);
+
+		Stage window = Main.getWindow();
+		Scene fscene = new Scene(vbox, window.getWidth(), window.getHeight());
+		window.setScene(fscene);
+
+		fscene.setOnMouseClicked(e -> window.setScene(this.scene));
+
+		controller.resetPlayer();
 	}
 
 	/**

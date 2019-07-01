@@ -22,15 +22,30 @@ public class GameController {
 		 view = new View(this);
 	}
 
+	/**
+	 * Move the player in the given direction if possible.
+	 * If the new position is the finish, then show the finish screen.
+	 * @param dir
+	 */
 	public void movePlayer(Direction dir){
 		if(mazeExists()) {
 			Cell curP = maze.getPlayer();
 			Cell newP = new Cell(curP.x + dir.getX(), curP.y + dir.getY());
 			if(maze.validIndex(newP) && maze.get(newP) != WALL) {
 				maze.setPlayer(newP);
+				if(newP.equals(maze.getFinish())){
+					view.finished();
+				}
 			}
 			draw();
 		}
+	}
+
+	/**
+	 * Put the player back at the starting position.
+	 */
+	public void resetPlayer(){
+		maze.setPlayer(maze.getStart());
 	}
 
 	/**

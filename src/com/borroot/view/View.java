@@ -228,14 +228,24 @@ public class View {
 		}
 	}
 
+	private String makeWintext(int width, int height){
+		if((width == 1 || width == 2) && (height == 1 || height == 2)) {
+			return "ARE YOU FOR REALS?\nHOW OLD ARE YOU, FOUR?";
+		}else if(peeked){
+			return "YOU PEEKED AT THE SOLUTION!\nI AM PAYING CLOSE ATTENTION..";
+		}else{
+			return "YOU SOLVED A " + width + "x" + height + " MAZE!";
+		}
+	}
+
 	/**
 	 * Show the finish screen.
-	 * @param w width of the maze in cells.
-	 * @param h height of the maze in cells.
+	 * @param width of the maze in cells.
+	 * @param height of the maze in cells.
 	 */
-	public void finished(int w, int h){
-		String wintext = (peeked)? "YOU PEEKED AT THE SOLUTION!\nI AM PAYING CLOSE ATTENTION.." :
-				"YOU SOLVED A " + w + "x" + h + " MAZE!";
+	public void finished(int width, int height){
+		String wintext = makeWintext(width, height);
+
 		Label lblSolved = new Label(wintext);
 		Label lblClick = new Label("Click to go back");
 		lblSolved.setFont(new Font(40));

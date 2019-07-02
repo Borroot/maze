@@ -173,7 +173,7 @@ public class View {
 		cbGenerator.getSelectionModel().selectFirst();
 
 		cbSolver.setItems(FXCollections.observableArrayList(new DepthSolver(), new BreathSolver(), new IterativeSolver(),
-				new GreedySolver()));
+				new GreedySolver(), new AStarSolver()));
 		cbSolver.getSelectionModel().selectFirst();
 	}
 

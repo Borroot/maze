@@ -8,6 +8,7 @@ package com.borroot.maze;
 public class Cell {
 
 	private Cell parent;
+	private int cost;
 
 	public final int x;
 	public final int y;
@@ -15,6 +16,14 @@ public class Cell {
 	public Cell(int x, int y){
 		this.x = x;
 		this.y = y;
+	}
+
+	public void setCost(int cost){
+		this.cost = cost;
+	}
+
+	public int getCost(){
+		return cost;
 	}
 
 	public void setParent(Cell parent){

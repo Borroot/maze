@@ -255,19 +255,12 @@ public class View {
 		VBox vbox = new VBox(10);
 		vbox.getChildren().addAll(lblSolved, lblClick);
 		vbox.setAlignment(Pos.CENTER);
+		root.setCenter(vbox);
+		hbox.setDisable(true);
 
-		Stage window = Main.getWindow();
-		Scene fscene = new Scene(vbox, scene.getWidth(), scene.getHeight());
-		window.setScene(fscene);
-
-
-		fscene.setOnMouseClicked(e -> {
-			double width = window.getWidth();
-			double height = window.getHeight();
-
-			window.setScene(this.scene);
-			window.setWidth(width);
-			window.setHeight(height);
+		vbox.setOnMouseClicked(e -> {
+			root.setCenter(gameView);
+			hbox.setDisable(false);
 		});
 
 		controller.resetPlayer();

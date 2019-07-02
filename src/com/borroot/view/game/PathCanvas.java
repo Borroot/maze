@@ -8,7 +8,6 @@ import javafx.scene.paint.LinearGradient;
 import javafx.scene.paint.Stop;
 
 import java.util.Iterator;
-import java.util.LinkedList;
 
 /**
  * This canvas draws a path for the solution of the maze.

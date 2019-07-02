@@ -16,12 +16,8 @@ public class GreedySolver implements Solver {
 	 * @param maze
 	 * @return if the cell in the given direction is empty.
 	 */
-	private boolean freeAtDir(Maze maze, Cell to){
-		try{
-			return maze.get(to) == EMPTY;
-		}catch(ArrayIndexOutOfBoundsException e){
-			return false;
-		}
+	private boolean freeAtDir(Maze maze, Cell cell){
+		return maze.validIndex(cell) && maze.get(cell) == EMPTY;
 	}
 
 	private int h(Maze maze, Cell cell){

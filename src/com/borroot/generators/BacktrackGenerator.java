@@ -132,6 +132,8 @@ public class BacktrackGenerator implements Generator {
 
 	@Override
 	public void generate(Maze maze){
+		maze.initGrid();
+
 		LinkedList<Cell> unvisited = maze.getEmptyCells();
 		LinkedList<Cell> visited = new LinkedList<>();
 

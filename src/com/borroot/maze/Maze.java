@@ -28,12 +28,21 @@ public class Maze {
 	public Maze(final int HEIGHT, final int WIDTH){
 		if(HEIGHT > 0 && WIDTH > 0){
 			maze = new Tile[HEIGHT * 2 + 1][WIDTH * 2 + 1];
-			initGrid();
+		}
+	}
+
+	public void initSurroundingWalls(){
+		for(int y = 0; y < maze.length; y++){
+			for(int x = 0; x < maze[y].length; x++){
+				if(x == 0 || y == 0 || x == maze[y].length || y == maze.length){
+					maze[y][x] = WALL;
+				}
+			}
 		}
 	}
 
 	/**
-	 * Initialize the maze to a grid with cells al having four walls.
+	 * Initialize the maze to a grid with cells all having four walls.
 	 */
 	public void initGrid(){
 		for(int y = 0; y < maze.length; y++){

@@ -99,6 +99,8 @@ public class KruskalGenerator implements Generator {
 
 	@Override
 	public void generate(Maze maze) {
+		maze.initGrid();
+
 		LinkedList<Cell> walls = maze.getWallCells();
 		Collections.shuffle(walls);
 

@@ -4,6 +4,10 @@ import com.borroot.maze.Cell;
 import com.borroot.maze.Maze;
 import javafx.scene.paint.Color;
 
+/**
+ * This canvas draws the player.
+ * @author Bram Pulles
+ */
 public class PlayerCanvas extends GameCanvas {
 
 	@Override

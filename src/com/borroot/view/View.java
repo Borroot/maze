@@ -7,13 +7,8 @@ import com.borroot.generators.Generator;
 import com.borroot.generators.KruskalGenerator;
 import com.borroot.maze.Direction;
 import com.borroot.maze.Maze;
-import com.borroot.solvers.BreathSolver;
-import com.borroot.solvers.DepthSolver;
-import com.borroot.solvers.IterativeSolver;
-import com.borroot.solvers.Solver;
+import com.borroot.solvers.*;
 import com.borroot.view.game.GameView;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -174,7 +169,8 @@ public class View {
 		cbGenerator.setItems(FXCollections.observableArrayList(new BacktrackGenerator(), new KruskalGenerator()));
 		cbGenerator.getSelectionModel().selectFirst();
 
-		cbSolver.setItems(FXCollections.observableArrayList(new DepthSolver(), new BreathSolver(), new IterativeSolver()));
+		cbSolver.setItems(FXCollections.observableArrayList(new DepthSolver(), new BreathSolver(), new IterativeSolver(),
+				new GreedySolver()));
 		cbSolver.getSelectionModel().selectFirst();
 	}
 
@@ -230,7 +226,7 @@ public class View {
 
 	private String makeWintext(int width, int height){
 		if((width == 1 || width == 2) && (height == 1 || height == 2)) {
-			return "ARE YOU FOR REALS?\nHOW OLD ARE YOU, FOUR?";
+			return "ARE YOU FOR REALS?!\nHOW OLD ARE YOU, FOUR?";
 		}else if(peeked){
 			return "YOU PEEKED AT THE SOLUTION!\nI AM PAYING CLOSE ATTENTION..";
 		}else{

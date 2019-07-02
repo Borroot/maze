@@ -7,12 +7,22 @@ package com.borroot.maze;
  */
 public class Cell {
 
+	private Cell parent;
+
 	public final int x;
 	public final int y;
 
 	public Cell(int x, int y){
 		this.x = x;
 		this.y = y;
+	}
+
+	public void setParent(Cell parent){
+		this.parent = parent;
+	}
+
+	public Cell getParent(){
+		return parent;
 	}
 
 	@Override

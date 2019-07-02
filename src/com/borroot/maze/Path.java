@@ -16,10 +16,10 @@ public class Path {
 	}
 
 	public Path(Cell cell){
-		while(cell.getParent() != null){
+		do{
 			add(cell);
 			cell = cell.getParent();
-		}
+		}while(cell != null);
 	}
 
 	public void add(Cell cell){
@@ -30,11 +30,20 @@ public class Path {
 		path.remove(cell);
 	}
 
+	public boolean contains(Cell cell){
+		return path.contains(cell);
+	}
+
 	public boolean isEmpty(){
 		return path.isEmpty();
 	}
 
 	public Iterator<Cell> iterator(){
 		return path.iterator();
+	}
+
+	@Override
+	public String toString(){
+		return path.toString();
 	}
 }

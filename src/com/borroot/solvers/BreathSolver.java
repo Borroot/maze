@@ -34,12 +34,10 @@ public class BreathSolver implements Solver {
 
 			for(Direction dir : Direction.values()){
 				Cell next = new Cell(current.x + dir.getX(), current.y + dir.getY());
-				if(maze.validIndex(next)){
-					if(!discovered.contains(next) && maze.get(next) == EMPTY){
-						discovered.add(next);
-						next.setParent(current);
-						queue.add(next);
-					}
+				if(!discovered.contains(next) && maze.validIndex(next) && maze.get(next) == EMPTY){
+					discovered.add(next);
+					next.setParent(current);
+					queue.add(next);
 				}
 			}
 		}

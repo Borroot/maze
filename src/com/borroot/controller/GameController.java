@@ -18,7 +18,6 @@ public class GameController {
 
 	private View view;
 	private Maze maze;
-	private Path path;
 
 	public GameController(){
 		 view = new View(this);
@@ -65,10 +64,10 @@ public class GameController {
 	 */
 	public void solveAction(Solver solver){
 		if(mazeExists()){
-			if(path == null){
-				path = solver.solve(maze);
+			if(maze.getPath().isEmpty()){
+				maze.setPath(solver.solve(maze));
 			}else{
-				path = null;
+				maze.setPath(new Path());
 			}
 			draw();
 		}

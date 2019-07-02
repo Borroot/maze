@@ -9,7 +9,7 @@ import static com.borroot.maze.Tile.EMPTY;
 
 public class IterativeSolver implements Solver {
 
-	private boolean solved = false;
+	private boolean solved;
 
 	/**
 	 * @param maze
@@ -28,16 +28,17 @@ public class IterativeSolver implements Solver {
 		if(depth >= bound){
 			return;
 		}
+
+		path.add(current);
+
 		if(current.equals(maze.getFinish())){
 			solved = true;
 			return;
 		}
 
-		path.add(current);
-
 		for(Direction dir : Direction.values()){
 			Cell next = new Cell(current.x + dir.getX(), current.y + dir.getY());
-			if(!solved && freeAtDir(maze, next)){
+			if(!solved && freeAtDir(maze, next) && !path.contains(next)){
 				search(maze, next, path, bound, depth++);
 			}
 		}
@@ -49,6 +50,8 @@ public class IterativeSolver implements Solver {
 
 	@Override
 	public Path solve(Maze maze) {
+		solved = false;
+
 		Path path = new Path();
 		int bound = 1;
 
@@ -56,7 +59,6 @@ public class IterativeSolver implements Solver {
 			search(maze, maze.getStart(), path, bound, 0);
 			bound++;
 		}
-
 		return path;
 	}
 

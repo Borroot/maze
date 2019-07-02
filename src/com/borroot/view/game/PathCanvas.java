@@ -44,17 +44,15 @@ public class PathCanvas extends GameCanvas {
 	private void drawSolution(Maze maze){
 		gc.beginPath();
 
-		Cell cur = maze.getStart();
-		LinkedList<Cell> drawnCells = new LinkedList<>();
-
 		Iterator<Cell> it = maze.getPath().iterator();
+		Cell cur = it.next();
 
 		while(it.hasNext()) {
-			gc.lineTo(cur.x * LL, cur.y * LL);
 			gc.moveTo(cur.x * LL, cur.y * LL);
-			drawnCells.add(cur);
 			cur = it.next();
+			gc.lineTo(cur.x * LL, cur.y * LL);
 		}
+		gc.moveTo(cur.x * LL, cur.y * LL);
 
 		gc.closePath();
 		gc.stroke();

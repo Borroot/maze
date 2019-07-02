@@ -46,7 +46,10 @@ public class GameController {
 	 * Put the player back at the starting position.
 	 */
 	public void resetPlayer(){
-		maze.setPlayer(maze.getStart());
+		if(mazeExists()) {
+			maze.setPlayer(maze.getStart());
+		}
+		draw();
 	}
 
 	/**

@@ -39,7 +39,7 @@ public class View {
 	private ChoiceBox<Solver> cbSolver = new ChoiceBox<>();
 
 	private final int MAX_VALUE = 80; // TODO: If bigger then drawing issues.
-	private final int INIT_VALUE = 3;
+	private final int INIT_VALUE = 10;
 	private TextField tfHeight = new TextField(INIT_VALUE + "");
 	private TextField tfWidth = new TextField(INIT_VALUE + "");
 
@@ -48,6 +48,7 @@ public class View {
 
 	private Button btnGenerate = new Button("Generate Maze!");
 	private Button btnSolve = new Button(btnStrSolve);
+	private Button btnReset = new Button("Reset to Start");
 
 	private boolean peeked = false;
 
@@ -147,7 +148,8 @@ public class View {
 		tfWidth.setPrefWidth(40);
 		initValueListeners();
 
-		hbox.getChildren().addAll(btnGenerate, cbGenerator, lblWidth, tfWidth, lblHeight, tfHeight, btnSolve, cbSolver);
+		hbox.getChildren().addAll(btnGenerate, cbGenerator, lblWidth, tfWidth, lblHeight, tfHeight,
+				btnSolve, cbSolver, btnReset);
 		hbox.setAlignment(Pos.BASELINE_CENTER);
 		hbox.setPadding(new Insets(10, 10, 10, 10));
 
@@ -196,6 +198,8 @@ public class View {
 				controller.solveAction(cbSolver.getValue());
 			}
 		});
+
+		btnReset.setOnAction(e -> controller.resetPlayer());
 	}
 
 	/**
@@ -225,9 +229,15 @@ public class View {
 		}
 	}
 
+	/**
+	 * @param width
+	 * @param height
+	 * @return the wintext to be shown.
+	 */
 	private String makeWintext(int width, int height){
-		if((width == 1 || width == 2) && (height == 1 || height == 2)) {
-			return "ARE YOU FOR REALS?!\nHOW OLD ARE YOU, FOUR?";
+		if(width < 8 && height < 8){
+			int num = (width < height)? height : width;
+			return "ARE YOU FOR REALS?!\nHOW OLD ARE YOU, " + num + "?";
 		}else if(peeked){
 			return "YOU PEEKED AT THE SOLUTION!\nI AM PAYING CLOSE ATTENTION..";
 		}else{

@@ -13,12 +13,11 @@ import static com.borroot.maze.Tile.*;
 public class Maze {
 
 	private Tile maze[][];
+	private Path path = new Path();
 
 	private Cell start;
 	private Cell finish;
 	private Cell player;
-
-	private boolean solved = false;
 
 	/**
 	 * Make a maze with the specified height and width.
@@ -116,21 +115,6 @@ public class Maze {
 		return maze[0].length;
 	}
 
-	/**
-	 * Set the value of solved.
-	 * @param solved if the maze is solved.
-	 */
-	public void setSolved(boolean solved){
-		this.solved = solved;
-	}
-
-	/**
-	 * @return if the maze is solved.
-	 */
-	public boolean isSolved(){
-		return solved;
-	}
-
 	public void set(Cell cell, Tile tile){
 		maze[cell.y][cell.x] = tile;
 	}
@@ -180,6 +164,14 @@ public class Maze {
 		return finish;
 	}
 
+	public void setPath(Path path){
+		this.path = path;
+	}
+
+	public Path getPath(){
+		return path;
+	}
+
 	/**
 	 * @param cell
 	 * @return if the given cell is in the maze-grid boundaries.
@@ -211,8 +203,6 @@ public class Maze {
 						case EMPTY:
 							builder.append(" ");
 							break;
-						case PATH:
-							builder.append("X");
 					}
 				}
 				builder.append(" ");

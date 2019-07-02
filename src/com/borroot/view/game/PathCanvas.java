@@ -1,17 +1,14 @@
 package com.borroot.view.game;
 
 import com.borroot.maze.Cell;
-import com.borroot.maze.Direction;
 import com.borroot.maze.Maze;
-import com.borroot.maze.Tile;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.LinearGradient;
 import javafx.scene.paint.Stop;
 
+import java.util.Iterator;
 import java.util.LinkedList;
-
-import static com.borroot.maze.Tile.*;
 
 /**
  * This canvas draws a path for the solution of the maze.
@@ -41,23 +38,6 @@ public class PathCanvas extends GameCanvas {
 	}
 
 	/**
-	 * Calculate the next cell based on the current cell and the list with already drawn cells.
-	 * @param maze
-	 * @param cur current cell.
-	 * @param drawnCells
-	 * @return the next cell.
-	 */
-	private Cell nextCell(Maze maze, Cell cur, LinkedList<Cell> drawnCells){
-		for(Direction dir : Direction.values()){
-			Cell next = new Cell(cur.x + dir.getX(), cur.y + dir.getY());
-			if(!drawnCells.contains(next) && maze.validIndex(next) && maze.get(next) == PATH){
-				return next;
-			}
-		}
-		return null;
-	}
-
-	/**
 	 * Draw all the lines starting from the start and then selecting the next tile until the finish is reached.
 	 * @param maze
 	 */
@@ -67,15 +47,14 @@ public class PathCanvas extends GameCanvas {
 		Cell cur = maze.getStart();
 		LinkedList<Cell> drawnCells = new LinkedList<>();
 
-		while(cur != null){
+		Iterator<Cell> it = maze.getPath().iterator();
+
+		while(it.hasNext()) {
 			gc.lineTo(cur.x * LL, cur.y * LL);
 			gc.moveTo(cur.x * LL, cur.y * LL);
 			drawnCells.add(cur);
-			cur = nextCell(maze, cur, drawnCells);
+			cur = it.next();
 		}
-
-		Cell finish = maze.getFinish();
-		gc.lineTo(finish.x * LL, finish.y * LL);
 
 		gc.closePath();
 		gc.stroke();
@@ -83,7 +62,7 @@ public class PathCanvas extends GameCanvas {
 
 	@Override
 	protected void actualDraw(Maze maze){
-		if(maze.isSolved()){
+		if(!maze.getPath().isEmpty()){
 			initLineSettings(maze);
 			drawSolution(maze);
 		}

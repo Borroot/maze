@@ -21,8 +21,8 @@ public class GameView extends Pane {
 	 */
 	public void draw(Maze maze){
 		for(Node node : this.getChildren()){
-			if(node instanceof GameCanvas) {
-				((GameCanvas) node).draw(maze, this.getHeight(), this.getWidth());
+			if(node instanceof GameCanvas){
+				((GameCanvas)node).draw(maze, this.getWidth(), this.getHeight());
 			}
 		}
 	}

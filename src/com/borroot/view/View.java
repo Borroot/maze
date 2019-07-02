@@ -7,6 +7,7 @@ import com.borroot.generators.Generator;
 import com.borroot.generators.KruskalGenerator;
 import com.borroot.maze.Direction;
 import com.borroot.maze.Maze;
+import com.borroot.maze.Path;
 import com.borroot.solvers.*;
 import com.borroot.view.game.GameView;
 import javafx.collections.FXCollections;

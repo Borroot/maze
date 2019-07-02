@@ -21,41 +21,12 @@ public abstract class GameCanvas extends Canvas {
 	/**
 	 * Clear the canvas, set the size of the canvas, the line length and the line width.
 	 * @param maze
-	 * @param h
-	 * @param w
 	 */
-	private void prepare(Maze maze, double h, double w){
+	private void prepare(Maze maze, double width, double height){
 		clearCanvas();
-		setSize(h, w);
-		setLineLength(maze, h, w);
-		setLineWidth(maze, h, w);
-	}
-
-	/**
-	 * Set the length of a line according to size of  the canvas and maze.
-	 * @param maze
-	 */
-	private void setLineLength(Maze maze, double h, double w){
-		int width = (int)w / maze.getWidth();
-		int height = (int)h / maze.getHeight();
-
-		LL = (width < height)? width : height;
-	}
-
-	/**
-	 * Set the width of a line according to the length of a line.
-	 * Also set the starting position for drawing so the maze will be drawn in the middle.
-	 * @param maze
-	 */
-	private void setLineWidth(Maze maze, double h, double w){
-		lineWidth = LL / 5;
-		lineWidth = (lineWidth % 2 == 0)? lineWidth : lineWidth - 1;
-
-		horizontalPadding = (int)((w - LL * maze.getWidth()) / 2 + 0.5 * LL);
-		verticalPadding = (int)((h - LL * maze.getHeight()) / 2 + 0.5 * LL);
-
-		gc.setLineWidth(lineWidth);
-		gc.translate(horizontalPadding, verticalPadding);
+		setSize(width, height);
+		setLineLength(maze, width, height);
+		setLineWidth(maze, width, height);
 	}
 
 	/**
@@ -68,22 +39,44 @@ public abstract class GameCanvas extends Canvas {
 
 	/**
 	 * Set the size of the canvas.
-	 * @param h
-	 * @param w
 	 */
-	private void setSize(double h, double w){
-		this.setHeight(h);
-		this.setWidth(w);
+	private void setSize(double width, double heigth){
+		this.setWidth(width);
+		this.setHeight(heigth);
+	}
+
+	/**
+	 * Set the length of a line according to size of  the canvas and maze.
+	 * @param maze
+	 */
+	private void setLineLength(Maze maze, double width, double heigth){
+		int w = (int)width / maze.getWidth();
+		int h = (int)heigth / maze.getHeight();
+		LL = (w < h)? w : h;
+	}
+
+	/**
+	 * Set the width of a line according to the length of a line.
+	 * Also set the starting position for drawing so the maze will be drawn in the middle.
+	 * @param maze
+	 */
+	private void setLineWidth(Maze maze, double width, double height){
+		lineWidth = LL / 5;
+		lineWidth = (lineWidth % 2 == 0)? lineWidth : lineWidth - 1;
+
+		horizontalPadding = (int)((width - LL * maze.getWidth()) / 2 + 0.5 * LL);
+		verticalPadding = (int)((height - LL * maze.getHeight()) / 2 + 0.5 * LL);
+
+		gc.setLineWidth(lineWidth);
+		gc.translate(horizontalPadding, verticalPadding);
 	}
 
 	/**
 	 * Prepare the canvas and then draw the maze.
 	 * @param maze
-	 * @param h
-	 * @param w
 	 */
-	protected void draw(Maze maze, double h, double w){
-		prepare(maze, h, w);
+	protected void draw(Maze maze, double width, double height){
+		prepare(maze, width, height);
 		actualDraw(maze);
 	}
 

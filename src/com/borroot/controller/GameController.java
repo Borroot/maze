@@ -4,6 +4,7 @@ import com.borroot.generators.Generator;
 import com.borroot.maze.Cell;
 import com.borroot.maze.Direction;
 import com.borroot.maze.Maze;
+import com.borroot.maze.Path;
 import com.borroot.solvers.Solver;
 import com.borroot.view.View;
 
@@ -17,6 +18,7 @@ public class GameController {
 
 	private View view;
 	private Maze maze;
+	private Path path;
 
 	public GameController(){
 		 view = new View(this);
@@ -63,10 +65,10 @@ public class GameController {
 	 */
 	public void solveAction(Solver solver){
 		if(mazeExists()){
-			if(!maze.isSolved()){
-				solver.solve(maze);
+			if(path == null){
+				path = solver.solve(maze);
 			}else{
-				solver.unsolve(maze);
+				path = null;
 			}
 			draw();
 		}

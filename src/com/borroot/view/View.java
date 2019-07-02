@@ -194,7 +194,7 @@ public class View {
 		btnSolve.setOnAction(e -> {
 			if(controller.mazeExists()) {
 				peeked = true;
-				String text = (btnSolve.getText() == btnStrSolve) ? btnStrUnsolve : btnStrSolve;
+				String text = (btnSolve.getText().equals(btnStrSolve)) ? btnStrUnsolve : btnStrSolve;
 				btnSolve.setText(text);
 				controller.solveAction(cbSolver.getValue());
 			}
@@ -205,19 +205,8 @@ public class View {
 	 * Initialize the listeners of textfields for the maze size.
 	 */
 	private void initValueListeners(){
-		tfHeight.textProperty().addListener(new ChangeListener<String>() {
-			@Override
-			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-				changedValue(tfHeight, newValue);
-			}
-		});
-
-		tfWidth.textProperty().addListener(new ChangeListener<String>() {
-			@Override
-			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-				changedValue(tfWidth, newValue);
-			}
-		});
+		tfHeight.textProperty().addListener((observable, oldValue, newValue) -> changedValue(tfHeight, newValue));
+		tfWidth.textProperty().addListener((observable, oldValue, newValue) -> changedValue(tfWidth, newValue));
 	}
 
 	/**

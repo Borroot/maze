@@ -10,7 +10,6 @@ public interface Generator {
 
 	/**
 	 * Generate the maze.
-	 * @param maze with cells all containing four walls.
 	 */
-	void generate(Maze maze);
+	Maze generate(final int WIDTH, final int HEIGHT);
 }

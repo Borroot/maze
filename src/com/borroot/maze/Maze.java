@@ -22,10 +22,10 @@ public class Maze {
 
 	/**
 	 * Make a maze with the specified height and width.
-	 * @param HEIGHT
 	 * @param WIDTH
+	 * @param HEIGHT
 	 */
-	public Maze(final int HEIGHT, final int WIDTH){
+	public Maze(final int WIDTH, final int HEIGHT){
 		if(HEIGHT > 0 && WIDTH > 0){
 			maze = new Tile[HEIGHT * 2 + 1][WIDTH * 2 + 1];
 		}

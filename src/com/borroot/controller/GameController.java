@@ -51,11 +51,9 @@ public class GameController {
 	/**
 	 * This function is called when the 'generate maze' button is called.
 	 * @param generator
-	 * @param height
-	 * @param width
 	 */
-	public void generateAction(Generator generator, int height, int width){
-		generateMaze(generator, height, width);
+	public void generateAction(Generator generator, final int WIDTH, final int HEIGHT){
+		generateMaze(generator, WIDTH, HEIGHT);
 		draw();
 	}
 
@@ -77,12 +75,11 @@ public class GameController {
 	/**
 	 * Generate a maze with the specified generator and size.
 	 * @param generator
-	 * @param height
-	 * @param width
+	 * @param WIDTH
+	 * @param HEIGHT
 	 */
-	public void generateMaze(Generator generator, int height, int width){
-		maze = new Maze(height, width);
-		generator.generate(maze);
+	public void generateMaze(Generator generator, final int WIDTH, final int HEIGHT){
+		maze = generator.generate(WIDTH, HEIGHT);
 
 		maze.setStart(new Cell(1, maze.getHeight()-1));
 		maze.setFinish(new Cell(maze.getWidth()-1, 1));

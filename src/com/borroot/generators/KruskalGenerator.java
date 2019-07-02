@@ -98,7 +98,8 @@ public class KruskalGenerator implements Generator {
 	}
 
 	@Override
-	public void generate(Maze maze) {
+	public Maze generate(final int WIDTH, final int HEIGHT) {
+		Maze maze = new Maze(WIDTH, HEIGHT);
 		maze.initGrid();
 
 		LinkedList<Cell> walls = maze.getWallCells();
@@ -119,6 +120,8 @@ public class KruskalGenerator implements Generator {
 				joinSets(dividedCells, cellsets);
 			}
 		}
+
+		return maze;
 	}
 
 	@Override

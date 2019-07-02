@@ -182,9 +182,9 @@ public class View {
 			peeked = false;
 			btnSolve.setText(btnStrSolve);
 
-			int height = Integer.parseInt(tfHeight.getText());
-			int width = Integer.parseInt(tfWidth.getText());
-			controller.generateAction(cbGenerator.getValue(), height, width);
+			final int WIDTH = Integer.parseInt(tfWidth.getText());
+			final int HEIGHT = Integer.parseInt(tfHeight.getText());
+			controller.generateAction(cbGenerator.getValue(), WIDTH, HEIGHT);
 		});
 
 		btnSolve.setOnAction(e -> {

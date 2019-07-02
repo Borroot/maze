@@ -29,12 +29,24 @@ public class Maze {
 		if(HEIGHT > 0 && WIDTH > 0){
 			maze = new Tile[HEIGHT * 2 + 1][WIDTH * 2 + 1];
 		}
+		initEmpty();
+	}
+
+	/**
+	 * Set every cell to empty.
+	 */
+	private void initEmpty(){
+		for(int y = 0; y < maze.length; y++){
+			for(int x = 0; x < maze[y].length; x++){
+				maze[y][x] = EMPTY;
+			}
+		}
 	}
 
 	public void initSurroundingWalls(){
 		for(int y = 0; y < maze.length; y++){
 			for(int x = 0; x < maze[y].length; x++){
-				if(x == 0 || y == 0 || x == maze[y].length || y == maze.length){
+				if(x == 0 || y == 0 || x == maze[y].length-1 || y == maze.length-1){
 					maze[y][x] = WALL;
 				}
 			}

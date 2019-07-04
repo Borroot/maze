@@ -61,6 +61,6 @@ public class AStarSolver implements Solver {
 
 	@Override
 	public String toString(){
-		return "A* Search";
+		return "A* (DF) Search";
 	}
 }

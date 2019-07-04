@@ -5,6 +5,7 @@ import com.borroot.controller.GameController;
 import com.borroot.generators.BacktrackGenerator;
 import com.borroot.generators.Generator;
 import com.borroot.generators.KruskalGenerator;
+import com.borroot.generators.RecursiveGenerator;
 import com.borroot.maze.Direction;
 import com.borroot.maze.Maze;
 import com.borroot.maze.Path;
@@ -169,7 +170,8 @@ public class View {
 	 * Initialize the choice boxes used to choose a generator and/or solver.
 	 */
 	private void initChoiceBoxes(){
-		cbGenerator.setItems(FXCollections.observableArrayList(new BacktrackGenerator(), new KruskalGenerator()));
+		cbGenerator.setItems(FXCollections.observableArrayList(new BacktrackGenerator(), new KruskalGenerator(),
+				new RecursiveGenerator()));
 		cbGenerator.getSelectionModel().selectFirst();
 
 		cbSolver.setItems(FXCollections.observableArrayList(new DepthSolver(), new BreathSolver(), new IterativeSolver(),

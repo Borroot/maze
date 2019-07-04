@@ -42,6 +42,9 @@ public class Maze {
 		}
 	}
 
+	/**
+	 * Initialize the grid with only the outer walls.
+	 */
 	public void initSurroundingWalls(){
 		for(int y = 0; y < maze.length; y++){
 			for(int x = 0; x < maze[y].length; x++){

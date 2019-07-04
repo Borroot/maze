@@ -6,13 +6,20 @@ import com.borroot.maze.Maze;
 import java.util.Random;
 
 import static com.borroot.generators.Orientation.*;
-import static com.borroot.maze.Tile.EMPTY;
-import static com.borroot.maze.Tile.WALL;
+import static com.borroot.maze.Tile.*;
 
+/**
+ * Generate a maze in a recursive matter.
+ * @author Bram Pulles
+ */
 public class RecursiveGenerator implements Generator {
 
 	private Random random = new Random();
 
+	/**
+	 * This class represents a chamber in the maze.
+	 * @author Bram Pulles
+	 */
 	private class Chamber {
 
 		private int x0, y0, x1, y1;
@@ -24,10 +31,16 @@ public class RecursiveGenerator implements Generator {
 			this.y1 = y1;
 		}
 
+		/**
+		 * @return the width of the chamber.
+		 */
 		private int getWidth(){
 			return x1 - x0;
 		}
 
+		/**
+		 * @return the height of the chamber.
+		 */
 		private int getHeight(){
 			return y1 - y0;
 		}
@@ -38,6 +51,11 @@ public class RecursiveGenerator implements Generator {
 		}
 	}
 
+	/**
+	 * @param chamber
+	 * @return a wall orientation to divide the biggest length (the width or height),
+	 * if they are the same then a random wall orientation.
+	 */
 	private Orientation wallOrientation(Chamber chamber){
 		if(chamber.getWidth() < chamber.getHeight()){
 			return HORIZONTAL;
@@ -48,18 +66,36 @@ public class RecursiveGenerator implements Generator {
 		}
 	}
 
+	/**
+	 * @param chamber
+	 * @param wallOrientation
+	 * @return the absolute starting position of the wall in the maze.
+	 */
 	private int startPos(Chamber chamber, Orientation wallOrientation){
 		int size = (wallOrientation == HORIZONTAL)? chamber.getHeight() : chamber.getWidth();
 		int relative = random.nextInt(size / 2) * 2 + 1;
 		return (wallOrientation == HORIZONTAL)? chamber.y0 + relative : chamber.x0 + relative;
 	}
 
+	/**
+	 * @param chamber
+	 * @param wallOrientation
+	 * @return the absolute open position of the wall in the maze.
+	 */
 	private int openPos(Chamber chamber, Orientation wallOrientation){
 		int size = (wallOrientation == HORIZONTAL)? chamber.getWidth() : chamber.getHeight();
 		int relative = random.nextInt(size / 2 + 1) * 2;
 		return (wallOrientation == HORIZONTAL)? chamber.x0 + relative : chamber.y0 + relative;
 	}
 
+	/**
+	 * Draw the walls in the maze with the hole.
+	 * @param maze
+	 * @param chamber
+	 * @param wallOrientation
+	 * @param startPos
+	 * @param openPos
+	 */
 	private void setWalls(Maze maze, Chamber chamber, Orientation wallOrientation, int startPos, int openPos){
 		if(wallOrientation == HORIZONTAL){
 			for(int x = chamber.x0; x < chamber.x1 + 1; x++){
@@ -74,6 +110,12 @@ public class RecursiveGenerator implements Generator {
 		}
 	}
 
+	/**
+	 * @param chamber
+	 * @param wallOrientation
+	 * @param startPos
+	 * @return two new chambers which are created by dividing the incoming chamber.
+	 */
 	private Chamber[] newChambers(Chamber chamber, Orientation wallOrientation, int startPos){
 		Chamber chambers[] = new Chamber[2];
 
@@ -88,6 +130,11 @@ public class RecursiveGenerator implements Generator {
 		return chambers;
 	}
 
+	/**
+	 * Generate the maze in a recursive manner.
+	 * @param maze
+	 * @param chamber
+	 */
 	private void generateRecursive(Maze maze, Chamber chamber){
 		if(chamber.getWidth() <= 0 || chamber.getHeight() <= 0){
 			return;

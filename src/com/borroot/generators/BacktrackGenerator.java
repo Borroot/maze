@@ -29,15 +29,6 @@ import static com.borroot.maze.Tile.EMPTY;
 public class BacktrackGenerator implements Generator {
 
 	/**
-	 * @param maze
-	 * @param cell
-	 * @return if this cell is valid regarding its x and y values.
-	 */
-	private boolean validCell(Maze maze, Cell cell){
-		return cell.x >= 0 && cell.y >= 0 && cell.y < maze.getHeight() && cell.x < maze.getWidth();
-	}
-
-	/**
 	 * Remove the wall between cell c1 and cell c2.
 	 * @param c1
 	 * @param c2
@@ -60,7 +51,7 @@ public class BacktrackGenerator implements Generator {
 			int newY = cell.y + dir.getY()*2;
 			Cell neighbor = new Cell(newX, newY);
 
-			if(validCell(maze, neighbor)){
+			if(maze.validIndex(neighbor)){
 				neighborList.push(neighbor);
 			}
 		}

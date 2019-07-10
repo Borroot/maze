@@ -28,15 +28,26 @@ public class PrimsGenerator implements Generator {
 
 	private Random random = new Random();
 
+	/**
+	 * Add all the walls from this cell to the walls list.
+	 * @param maze
+	 * @param cell
+	 * @param walls
+	 */
 	private void addWalls(Maze maze, Cell cell, LinkedList<Cell> walls){
 		for(Direction dir : Direction.values()){
 			Cell wall = new Cell(cell.x + dir.getX(), cell.y + dir.getY());
-			if(wall.x > 0 && wall.y > 0 && wall.x < maze.getWidth()-1 && wall.y < maze.getHeight()-1){
+			if(wall.x > 0 && wall.y > 0 && wall.x < maze.getWidth()-1 && wall.y < maze.getHeight()-1 && !walls.contains(wall)){
 				walls.add(wall);
 			}
 		}
 	}
 
+	/**
+	 * @param wall
+	 * @param visited
+	 * @return the unvisited cell this wall divides.
+	 */
 	private Cell unvisitedCell(Cell wall, LinkedList<Cell> visited){
 		Cell north = new Cell(wall.x + NORTH.getX(), wall.y + NORTH.getY());
 		Cell south = new Cell(wall.x + SOUTH.getX(), wall.y + SOUTH.getY());
@@ -55,6 +66,11 @@ public class PrimsGenerator implements Generator {
 		}
 	}
 
+	/**
+	 * @param wall
+	 * @param visited
+	 * @return if this wall divides a visited and unvisited cell.
+	 */
 	private boolean wallDivides(Cell wall, LinkedList<Cell> visited){
 		Cell north = new Cell(wall.x + NORTH.getX(), wall.y + NORTH.getY());
 		Cell south = new Cell(wall.x + SOUTH.getX(), wall.y + SOUTH.getY());

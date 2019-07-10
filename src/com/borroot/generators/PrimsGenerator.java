@@ -26,8 +26,6 @@ import static com.borroot.maze.Direction.*;
  */
 public class PrimsGenerator implements Generator {
 
-	private Random random = new Random();
-
 	/**
 	 * Add all the walls from this cell to the walls list.
 	 * @param maze
@@ -95,6 +93,7 @@ public class PrimsGenerator implements Generator {
 		LinkedList<Cell> visited = new LinkedList<>();
 		LinkedList<Cell> walls = new LinkedList<>();
 
+		Random random = new Random();
 		int startX = random.nextInt(maze.getWidth() / 2) * 2 + 1;
 		int startY = random.nextInt(maze.getHeight() / 2) * 2 + 1;
 		Cell start = new Cell(startX, startY);

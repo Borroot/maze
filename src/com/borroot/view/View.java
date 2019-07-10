@@ -170,7 +170,7 @@ public class View {
 	 */
 	private void initChoiceBoxes(){
 		cbGenerator.setItems(FXCollections.observableArrayList(new BacktrackGenerator(), new KruskalGenerator(),
-				new RecursiveGenerator(), new PrimsGenerator()));
+				new RecursiveGenerator(), new PrimsGenerator(), new AldousBroderGenerator()));
 		cbGenerator.getSelectionModel().selectFirst();
 
 		cbSolver.setItems(FXCollections.observableArrayList(new DepthSolver(), new BreathSolver(), new IterativeSolver(),

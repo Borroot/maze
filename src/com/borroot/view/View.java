@@ -2,15 +2,14 @@ package com.borroot.view;
 
 import com.borroot.Main;
 import com.borroot.controller.GameController;
-import com.borroot.generators.BacktrackGenerator;
-import com.borroot.generators.Generator;
-import com.borroot.generators.KruskalGenerator;
-import com.borroot.generators.RecursiveGenerator;
+import com.borroot.generators.*;
 import com.borroot.maze.Direction;
 import com.borroot.maze.Maze;
 import com.borroot.maze.Path;
 import com.borroot.solvers.*;
 import com.borroot.view.game.GameView;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -171,7 +170,7 @@ public class View {
 	 */
 	private void initChoiceBoxes(){
 		cbGenerator.setItems(FXCollections.observableArrayList(new BacktrackGenerator(), new KruskalGenerator(),
-				new RecursiveGenerator()));
+				new RecursiveGenerator(), new PrimsGenerator()));
 		cbGenerator.getSelectionModel().selectFirst();
 
 		cbSolver.setItems(FXCollections.observableArrayList(new DepthSolver(), new BreathSolver(), new IterativeSolver(),
